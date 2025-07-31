@@ -1,9 +1,9 @@
-# Fine-tuning a 🐸 TTS model
+# Fine-tuning a 🐸 tts model
 
 ## Fine-tuning
 
 Fine-tuning takes a pre-trained model and retrains it to improve the model performance on a different task or dataset.
-In 🐸TTS we provide different pre-trained models in different languages and different pros and cons. You can take one of
+In 🐸tts we provide different pre-trained models in different languages and different pros and cons. You can take one of
 them and fine-tune it for your own dataset. This will help you in two main ways:
 
 1. Faster learning
@@ -26,11 +26,11 @@ them and fine-tune it for your own dataset. This will help you in two main ways:
     it still takes a bit of tinkering.
 
 
-## Steps to fine-tune a 🐸 TTS model
+## Steps to fine-tune a 🐸 tts model
 
 1. Setup your dataset.
 
-    You need to format your target dataset in a certain way so that 🐸TTS data loader will be able to load it for the
+    You need to format your target dataset in a certain way so that 🐸tts data loader will be able to load it for the
     training. Please see {ref}`this page <formatting_your_dataset>` for more information about formatting.
 
 2. Choose the model you want to fine-tune.
@@ -68,7 +68,7 @@ them and fine-tune it for your own dataset. This will help you in two main ways:
 
     You need to change certain fields in the model config. You have 3 options for playing with the configuration.
 
-    1. Edit the fields in the ```config.json``` file if you want to use ```TTS/bin/train_tts.py``` to train the model.
+    1. Edit the fields in the ```config.json``` file if you want to use ```tts/bin/train_tts.py``` to train the model.
     2. Edit the fields in one of the training scripts in the ```recipes``` directory if you want to use python.
     3. Use the command-line arguments to override the fields like ```--coqpit.lr 0.00001``` to change the learning rate.
 
@@ -97,7 +97,7 @@ them and fine-tune it for your own dataset. This will help you in two main ways:
     ```
 
     ```bash
-    CUDA_VISIBLE_DEVICES="0" python TTS/bin/train_tts.py \
+    CUDA_VISIBLE_DEVICES="0" python tts/bin/train_tts.py \
         --config_path  /home/ubuntu/.local/share/tts/tts_models--en--ljspeech--glow-tts/config.json \
         --restore_path  /home/ubuntu/.local/share/tts/tts_models--en--ljspeech--glow-tts/model_file.pth
     ```

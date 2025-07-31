@@ -1,6 +1,6 @@
-# ⓍTTS
-ⓍTTS is a super cool Text-to-Speech model that lets you clone voices in different languages by using just a quick 3-second audio clip. Built on the 🐢Tortoise,
-ⓍTTS has important model changes that make cross-language voice cloning and multi-lingual speech generation super easy.
+# Ⓧtts
+Ⓧtts is a super cool Text-to-Speech model that lets you clone voices in different languages by using just a quick 3-second audio clip. Built on the 🐢Tortoise,
+Ⓧtts has important model changes that make cross-language voice cloning and multi-lingual speech generation super easy.
 There is no need for an excessive amount of training data that spans countless hours.
 
 This is the same model that powers [Coqui Studio](https://coqui.ai/), and [Coqui API](https://docs.coqui.ai/docs), however we apply
@@ -24,7 +24,7 @@ a few tricks to make it faster and support streaming inference.
 Current implementation only supports inference and GPT encoder training.
 
 ### Languages
-As of now, XTTS-v2 supports 16 languages: English (en), Spanish (es), French (fr), German (de), Italian (it), Portuguese (pt), Polish (pl), Turkish (tr), Russian (ru), Dutch (nl), Czech (cs), Arabic (ar), Chinese (zh-cn), Japanese (ja), Hungarian (hu) and Korean (ko).
+As of now, Xtts-v2 supports 16 languages: English (en), Spanish (es), French (fr), German (de), Italian (it), Portuguese (pt), Polish (pl), Turkish (tr), Russian (ru), Dutch (nl), Czech (cs), Arabic (ar), Chinese (zh-cn), Japanese (ja), Hungarian (hu) and Korean (ko).
 
 Stay tuned as we continue to add support for more languages. If you have any language requests, please feel free to reach out.
 
@@ -37,7 +37,7 @@ You can also mail us at info@coqui.ai.
 
 ### Inference
 
-#### 🐸TTS Command line
+#### 🐸tts Command line
 
 You can check all supported languages with the following command: 
 
@@ -95,7 +95,7 @@ or for all wav files in a directory you can use:
      --use_cuda true
 ```
 
-#### 🐸TTS API
+#### 🐸tts API
 
 ##### Clone a voice
 You can clone a speaker voice using a single or multiple references:
@@ -106,8 +106,8 @@ Splits the text into sentences and generates audio for each sentence. The audio 
 You can optionally disable sentence splitting for better coherence but more VRAM and possibly hitting models context length limit.
 
 ```python
-from TTS.api import TTS
-tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
+from verbamanent.api import tts
+tts = tts("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
 
 # generate speech by cloning a voice using default settings
 tts.tts_to_file(text="It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
@@ -123,18 +123,18 @@ tts.tts_to_file(text="It took me quite a long time to develop a voice, and now t
 You can pass multiple audio files to the `speaker_wav` argument for better voice cloning.
 
 ```python
-from TTS.api import TTS
+from verbamanent.api import tts
 
-# using the default version set in 🐸TTS
-tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
+# using the default version set in 🐸tts
+tts = tts("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
 
 # using a specific version
-# 👀 see the branch names for versions on https://huggingface.co/coqui/XTTS-v2/tree/main
+# 👀 see the branch names for versions on https://huggingface.co/coqui/Xtts-v2/tree/main
 # ❗some versions might be incompatible with the API
-tts = TTS("xtts_v2.0.2", gpu=True)
+tts = tts("xtts_v2.0.2", gpu=True)
 
-# getting the latest XTTS_v2
-tts = TTS("xtts", gpu=True)
+# getting the latest Xtts_v2
+tts = tts("xtts", gpu=True)
 
 # generate speech by cloning a voice using default settings
 tts.tts_to_file(text="It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
@@ -148,8 +148,8 @@ tts.tts_to_file(text="It took me quite a long time to develop a voice, and now t
 You can do inference using one of the available speakers using the following code:
 
 ```python
-from TTS.api import TTS
-tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
+from verbamanent.api import tts
+tts = tts("tts_models/multilingual/multi-dataset/xtts_v2", gpu=True)
 
 # generate speech by cloning a voice using default settings
 tts.tts_to_file(text="It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
@@ -161,7 +161,7 @@ tts.tts_to_file(text="It took me quite a long time to develop a voice, and now t
 ```
 
 
-#### 🐸TTS Model API
+#### 🐸tts Model API
 
 To use the model API, you need to download the model files and pass config and model file paths manually.
 
@@ -195,8 +195,8 @@ pip install deepspeed==0.10.3
 import os
 import torch
 import torchaudio
-from TTS.tts.configs.xtts_config import XttsConfig
-from TTS.tts.models.xtts import Xtts
+from verbamanent.tts.configs.xtts_config import XttsConfig
+from verbamanent.tts.models.xtts import Xtts
 
 print("Loading model...")
 config = XttsConfig()
@@ -231,8 +231,8 @@ import os
 import time
 import torch
 import torchaudio
-from TTS.tts.configs.xtts_config import XttsConfig
-from TTS.tts.models.xtts import Xtts
+from verbamanent.tts.configs.xtts_config import XttsConfig
+from verbamanent.tts.models.xtts import Xtts
 
 print("Loading model...")
 config = XttsConfig()
@@ -267,36 +267,36 @@ torchaudio.save("xtts_streaming.wav", wav.squeeze().unsqueeze(0).cpu(), 24000)
 ### Training
 
 #### Easy training
-To make `XTTS_v2` GPT encoder training easier for beginner users we did a gradio demo that implements the whole fine-tuning pipeline. The gradio demo enables the user to easily do the following steps:
+To make `Xtts_v2` GPT encoder training easier for beginner users we did a gradio demo that implements the whole fine-tuning pipeline. The gradio demo enables the user to easily do the following steps:
 
-- Preprocessing of the uploaded audio or audio files in 🐸 TTS coqui formatter
-- Train the XTTS GPT encoder with the processed data
+- Preprocessing of the uploaded audio or audio files in 🐸 tts coqui formatter
+- Train the Xtts GPT encoder with the processed data
 - Inference support using the fine-tuned model
 
 The user can run this gradio demo locally or remotely using a Colab Notebook.
 
 ##### Run demo on Colab
-To make the `XTTS_v2` fine-tuning more accessible for users that do not have good GPUs available we did a Google Colab Notebook.
+To make the `Xtts_v2` fine-tuning more accessible for users that do not have good GPUs available we did a Google Colab Notebook.
 
 The Colab Notebook is available [here](https://colab.research.google.com/drive/1GiI4_X724M8q2W-zZ-jXo7cWTV7RfaH-?usp=sharing).
 
-To learn how to use this Colab Notebook please check the [XTTS fine-tuning video]().
+To learn how to use this Colab Notebook please check the [Xtts fine-tuning video]().
 
 If you are not able to acess the video you need to follow the steps:
 
 1. Open the Colab notebook and start the demo by runining the first two cells (ignore pip install errors in the first one).
 2. Click on the link "Running on public URL:" on the second cell output.
 3. On the first Tab (1 - Data processing) you need to select the audio file or files, wait for upload, and then click on the button "Step 1 - Create dataset" and then wait until the dataset processing is done.
-4. Soon as the dataset processing is done you need to go to the second Tab (2 - Fine-tuning XTTS Encoder) and press the button "Step 2 - Run the training" and then wait until the training is finished. Note that it can take up to 40 minutes.
-5. Soon the training is done you can go to the third Tab (3 - Inference) and then click on the button "Step 3 - Load Fine-tuned XTTS model" and wait until the fine-tuned model is loaded. Then you can do the inference on the model by clicking on the button "Step 4 - Inference".
+4. Soon as the dataset processing is done you need to go to the second Tab (2 - Fine-tuning Xtts Encoder) and press the button "Step 2 - Run the training" and then wait until the training is finished. Note that it can take up to 40 minutes.
+5. Soon the training is done you can go to the third Tab (3 - Inference) and then click on the button "Step 3 - Load Fine-tuned Xtts model" and wait until the fine-tuned model is loaded. Then you can do the inference on the model by clicking on the button "Step 4 - Inference".
 
 
 ##### Run demo locally
 
 To run the demo locally you need to do the following steps:
-1. Install   🐸 TTS following the instructions available [here](https://tts.readthedocs.io/en/dev/installation.html#installation).
-2. Install the Gradio demo requirements with the command `python3 -m pip install -r TTS/demos/xtts_ft_demo/requirements.txt`
-3. Run the Gradio demo using the command `python3 TTS/demos/xtts_ft_demo/xtts_demo.py`
+1. Install   🐸 tts following the instructions available [here](https://tts.readthedocs.io/en/dev/installation.html#installation).
+2. Install the Gradio demo requirements with the command `python3 -m pip install -r tts/demos/xtts_ft_demo/requirements.txt`
+3. Run the Gradio demo using the command `python3 tts/demos/xtts_ft_demo/xtts_demo.py`
 4. Follow the steps presented in the [tutorial video](https://www.youtube.com/watch?v=8tpDiiouGxc&feature=youtu.be) to be able to fine-tune and test the fine-tuned model.
 
 
@@ -304,15 +304,15 @@ If you are not able to access the video, here is what you need to do:
 
 1. On the first Tab (1 - Data processing) select the audio file or files, wait for upload
 2. Click on the button "Step 1 - Create dataset" and then wait until the dataset processing is done.
-3. Go to the second Tab (2 - Fine-tuning XTTS Encoder) and press the button "Step 2 - Run the training" and then wait until the training is finished. it will take some time.
-4. Go to the third Tab (3 - Inference) and then click on the button "Step 3 - Load Fine-tuned XTTS model" and wait until the fine-tuned model is loaded.
+3. Go to the second Tab (2 - Fine-tuning Xtts Encoder) and press the button "Step 2 - Run the training" and then wait until the training is finished. it will take some time.
+4. Go to the third Tab (3 - Inference) and then click on the button "Step 3 - Load Fine-tuned Xtts model" and wait until the fine-tuned model is loaded.
 5. Now you can run inference with the model by clicking on the button "Step 4 - Inference".
 
 #### Advanced training
 
-A recipe for `XTTS_v2` GPT encoder training using `LJSpeech` dataset is available at https://github.com/giordebug/verbamanent/tree/dev/recipes/ljspeech/xtts_v1/train_gpt_xtts.py
+A recipe for `Xtts_v2` GPT encoder training using `LJSpeech` dataset is available at https://github.com/giordebug/verbamanent/tree/dev/recipes/ljspeech/xtts_v1/train_gpt_xtts.py
 
-You need to change the fields of the `BaseDatasetConfig` to match your dataset and then update `GPTArgs` and `GPTTrainerConfig` fields as you need. By default, it will use the same parameters that XTTS v1.1 model was trained with. To speed up the model convergence, as default, it will also download the XTTS v1.1 checkpoint and load it.
+You need to change the fields of the `BaseDatasetConfig` to match your dataset and then update `GPTArgs` and `GPTTrainerConfig` fields as you need. By default, it will use the same parameters that Xtts v1.1 model was trained with. To speed up the model convergence, as default, it will also download the Xtts v1.1 checkpoint and load it.
 
 After training you can do inference following the code bellow.
 
@@ -320,15 +320,15 @@ After training you can do inference following the code bellow.
 import os
 import torch
 import torchaudio
-from TTS.tts.configs.xtts_config import XttsConfig
-from TTS.tts.models.xtts import Xtts
+from verbamanent.tts.configs.xtts_config import XttsConfig
+from verbamanent.tts.models.xtts import Xtts
 
 # Add here the xtts_config path
-CONFIG_PATH = "recipes/ljspeech/xtts_v1/run/training/GPT_XTTS_LJSpeech_FT-October-23-2023_10+36AM-653f2e75/config.json"
+CONFIG_PATH = "recipes/ljspeech/xtts_v1/run/training/GPT_Xtts_LJSpeech_FT-October-23-2023_10+36AM-653f2e75/config.json"
 # Add here the vocab file that you have used to train the model
-TOKENIZER_PATH = "recipes/ljspeech/xtts_v1/run/training/XTTS_v2_original_model_files/vocab.json"
+TOKENIZER_PATH = "recipes/ljspeech/xtts_v1/run/training/Xtts_v2_original_model_files/vocab.json"
 # Add here the checkpoint that you want to do inference with
-XTTS_CHECKPOINT = "recipes/ljspeech/xtts_v1/run/training/GPT_XTTS_LJSpeech_FT/best_model.pth"
+Xtts_CHECKPOINT = "recipes/ljspeech/xtts_v1/run/training/GPT_Xtts_LJSpeech_FT/best_model.pth"
 # Add here the speaker reference
 SPEAKER_REFERENCE = "LjSpeech_reference.wav"
 
@@ -339,7 +339,7 @@ print("Loading model...")
 config = XttsConfig()
 config.load_json(CONFIG_PATH)
 model = Xtts.init_from_config(config)
-model.load_checkpoint(config, checkpoint_path=XTTS_CHECKPOINT, vocab_path=TOKENIZER_PATH, use_deepspeed=False)
+model.load_checkpoint(config, checkpoint_path=Xtts_CHECKPOINT, vocab_path=TOKENIZER_PATH, use_deepspeed=False)
 model.cuda()
 
 print("Computing speaker latents...")
@@ -370,18 +370,18 @@ torchaudio.save(OUTPUT_WAV_PATH, torch.tensor(out["wav"]).unsqueeze(0), 24000)
 
 ## XttsConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.xtts_config.XttsConfig
+.. autoclass:: tts.tts.configs.xtts_config.XttsConfig
     :members:
 ```
 
 ## XttsArgs
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.xtts.XttsArgs
+.. autoclass:: tts.tts.models.xtts.XttsArgs
     :members:
 ```
 
-## XTTS Model
+## Xtts Model
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.xtts.XTTS
+.. autoclass:: tts.tts.models.xtts.Xtts
     :members:
 ```

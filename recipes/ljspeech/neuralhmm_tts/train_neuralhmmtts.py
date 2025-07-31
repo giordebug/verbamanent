@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseAudioConfig
-from TTS.tts.configs.neuralhmm_tts_config import NeuralhmmTTSConfig
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.neuralhmm_tts import NeuralhmmTTS
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.config.shared_configs import BaseAudioConfig
+from verbamanent.tts.configs.neuralhmm_tts_config import NeuralhmmttsConfig
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.neuralhmm_tts import Neuralhmmtts
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -30,7 +30,7 @@ audio_config = BaseAudioConfig(
     preemphasis=0.0,
 )
 
-config = NeuralhmmTTSConfig(  # This is the config that is saved for the future use
+config = NeuralhmmttsConfig(  # This is the config that is saved for the future use
     run_name="neuralhmmtts_ljspeech",
     audio=audio_config,
     batch_size=32,
@@ -62,13 +62,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # If characters are not defined in the config, default characters are passed to the config
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,
@@ -80,7 +80,7 @@ train_samples, eval_samples = load_tts_samples(
 # Models take a config object and a speaker manager as input
 # Config defines the details of the model like the number of layers, the size of the embedding, etc.
 # Speaker manager is used by multi-speaker models.
-model = NeuralhmmTTS(config, ap, tokenizer)
+model = Neuralhmmtts(config, ap, tokenizer)
 
 
 # init the trainer and 🚀

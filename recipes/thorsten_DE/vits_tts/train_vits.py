@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.vits_config import VitsConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.vits import Vits, VitsAudioConfig
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
-from TTS.utils.downloaders import download_thorsten_de
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.vits_config import VitsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.vits import Vits, VitsAudioConfig
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.utils.downloaders import download_thorsten_de
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 dataset_config = BaseDatasetConfig(
@@ -67,13 +67,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # config is updated with the default characters if not defined in the config.
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,

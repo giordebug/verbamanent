@@ -7,10 +7,10 @@ import torch
 from torch.utils.data import DataLoader
 
 from tests import get_tests_data_path, get_tests_output_path
-from TTS.tts.configs.shared_configs import BaseDatasetConfig, BaseTTSConfig
-from TTS.tts.datasets import TTSDataset, load_tts_samples
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig, BasettsConfig
+from verbamanent.tts.datasets import ttsDataset, load_tts_samples
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 # pylint: disable=unused-variable
 
@@ -18,7 +18,7 @@ OUTPATH = os.path.join(get_tests_output_path(), "loader_tests/")
 os.makedirs(OUTPATH, exist_ok=True)
 
 # create a dummy config for testing data loaders.
-c = BaseTTSConfig(text_cleaner="english_cleaners", num_loader_workers=0, batch_size=2, use_noise_augment=False)
+c = BasettsConfig(text_cleaner="english_cleaners", num_loader_workers=0, batch_size=2, use_noise_augment=False)
 c.r = 5
 c.data_path = os.path.join(get_tests_data_path(), "ljspeech/")
 
@@ -53,7 +53,7 @@ if not os.path.exists(c.data_path):
 print(" > Dynamic data loader test: {}".format(DATA_EXIST))
 
 
-class TestTTSDataset(unittest.TestCase):
+class TestttsDataset(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.max_loader_iter = 4
@@ -63,8 +63,8 @@ class TestTTSDataset(unittest.TestCase):
         # load dataset
         meta_data_train, meta_data_eval = load_tts_samples(dataset_config, eval_split=True, eval_split_size=0.2)
         items = meta_data_train + meta_data_eval
-        tokenizer, _ = TTSTokenizer.init_from_config(c)
-        dataset = TTSDataset(
+        tokenizer, _ = ttsTokenizer.init_from_config(c)
+        dataset = ttsDataset(
             outputs_per_step=r,
             compute_linear_spec=True,
             return_wav=True,

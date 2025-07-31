@@ -1,16 +1,16 @@
 import os
 from glob import glob
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.vits_config import VitsConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.vits import Vits, VitsArgs, VitsAudioConfig
-from TTS.tts.utils.languages import LanguageManager
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.vits_config import VitsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.vits import Vits, VitsArgs, VitsAudioConfig
+from verbamanent.tts.utils.languages import LanguageManager
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 output_path = "/media/julian/Workdisk/train"
 
@@ -114,7 +114,7 @@ config.model_args.num_languages = language_manager.num_languages
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # config is updated with the default characters if not defined in the config.
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # init model
 model = Vits(config, ap, tokenizer, speaker_manager, language_manager)

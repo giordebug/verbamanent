@@ -2,7 +2,7 @@ import unittest
 
 import torch as T
 
-from TTS.tts.layers.tacotron.tacotron import CBHG, Decoder, Encoder, Prenet
+from verbamanent.tts.layers.tacotron.tacotron import CBHG, Decoder, Encoder, Prenet
 
 # pylint: disable=unused-variable
 

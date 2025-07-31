@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from TTS.vocoder.models.random_window_discriminator import RandomWindowDiscriminator
+from verbamanent.vocoder.models.random_window_discriminator import RandomWindowDiscriminator
 
 
 def test_rwd():

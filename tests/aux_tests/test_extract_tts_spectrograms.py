@@ -4,16 +4,16 @@ import unittest
 import torch
 
 from tests import get_tests_input_path, get_tests_output_path, run_cli
-from TTS.config import load_config
-from TTS.tts.models import setup_model
+from verbamanent.config import load_config
+from verbamanent.tts.models import setup_model
 
 torch.manual_seed(1)
 
 
 # pylint: disable=protected-access
-class TestExtractTTSSpectrograms(unittest.TestCase):
+class TestExtractttsSpectrograms(unittest.TestCase):
     @staticmethod
-    def test_GlowTTS():
+    def test_Glowtts():
         # set paths
         config_path = os.path.join(get_tests_input_path(), "test_glow_tts.json")
         checkpoint_path = os.path.join(get_tests_output_path(), "glowtts.pth")
@@ -26,7 +26,7 @@ class TestExtractTTSSpectrograms(unittest.TestCase):
         torch.save({"model": model.state_dict()}, checkpoint_path)
         # run test
         run_cli(
-            f'CUDA_VISIBLE_DEVICES="" python TTS/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
+            f'CUDA_VISIBLE_DEVICES="" python tts/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
         )
         run_cli(f'rm -rf "{output_path}" "{checkpoint_path}"')
 
@@ -44,7 +44,7 @@ class TestExtractTTSSpectrograms(unittest.TestCase):
         torch.save({"model": model.state_dict()}, checkpoint_path)
         # run test
         run_cli(
-            f'CUDA_VISIBLE_DEVICES="" python TTS/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
+            f'CUDA_VISIBLE_DEVICES="" python tts/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
         )
         run_cli(f'rm -rf "{output_path}" "{checkpoint_path}"')
 
@@ -62,6 +62,6 @@ class TestExtractTTSSpectrograms(unittest.TestCase):
         torch.save({"model": model.state_dict()}, checkpoint_path)
         # run test
         run_cli(
-            f'CUDA_VISIBLE_DEVICES="" python TTS/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
+            f'CUDA_VISIBLE_DEVICES="" python tts/bin/extract_tts_spectrograms.py --config_path "{config_path}" --checkpoint_path "{checkpoint_path}" --output_path "{output_path}"'
         )
         run_cli(f'rm -rf "{output_path}" "{checkpoint_path}"')

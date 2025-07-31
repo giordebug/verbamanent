@@ -2,7 +2,7 @@
 
 1. Implement layers.
 
-    You can either implement the layers under `TTS/tts/layers/new_model.py` or in the model file `TTS/tts/model/new_model.py`.
+    You can either implement the layers under `tts/tts/layers/new_model.py` or in the model file `tts/tts/model/new_model.py`.
     You can also reuse layers already implemented.
 
 2. Test layers.
@@ -12,7 +12,7 @@
 
 3. Implement a loss function.
 
-    We keep loss functions under `TTS/tts/layers/losses.py`. You can also mix-and-match implemented loss functions as you like.
+    We keep loss functions under `tts/tts/layers/losses.py`. You can also mix-and-match implemented loss functions as you like.
 
    A loss function returns a dictionary in a format ```{’loss’: loss, ‘loss1’:loss1 ...}``` and the dictionary must at least define the `loss` key which is the actual value used by the optimizer. All the items in the dictionary are automatically logged on the terminal and the Tensorboard.
 
@@ -24,19 +24,19 @@
 
 5. Implement `MyModel`.
 
-    In 🐸TTS, a model class is a self-sufficient implementation of a model directing all the interactions with the other
+    In 🐸tts, a model class is a self-sufficient implementation of a model directing all the interactions with the other
     components. It is enough to implement the API provided by the `BaseModel` class to comply.
 
     A model interacts with the `Trainer API` for training, `Synthesizer API` for inference and testing.
 
-    A 🐸TTS model must return a dictionary by the `forward()` and `inference()` functions. This dictionary must `model_outputs` key that is considered as the main model output by the `Trainer` and `Synthesizer`.
+    A 🐸tts model must return a dictionary by the `forward()` and `inference()` functions. This dictionary must `model_outputs` key that is considered as the main model output by the `Trainer` and `Synthesizer`.
 
-    You can place your `tts` model implementation under `TTS/tts/models/new_model.py` then inherit and implement the `BaseTTS`.
+    You can place your `tts` model implementation under `tts/tts/models/new_model.py` then inherit and implement the `Basetts`.
 
     There is also the `callback` interface by which you can manipulate both the model and the `Trainer` states. Callbacks give you
     an infinite flexibility to add custom behaviours for your model and training routines.
 
-    For more details, see {ref}`BaseTTS <Base tts Model>` and :obj:`TTS.utils.callbacks`.
+    For more details, see {ref}`Basetts <Base tts Model>` and :obj:`tts.utils.callbacks`.
 
 6. Optionally, define `MyModelArgs`.
 
@@ -53,7 +53,7 @@
 
 8. Define `MyModelConfig`.
 
-    Place `MyModelConfig` file under `TTS/models/configs`. It is enough to inherit the `BaseTTSConfig` to make your
+    Place `MyModelConfig` file under `tts/models/configs`. It is enough to inherit the `BasettsConfig` to make your
     config compatible with the `Trainer`. You should also include `MyModelArgs` as a field if defined. The rest of the fields should define the model
     specific values and parameters.
 
@@ -62,15 +62,15 @@
     We love you more when you document your code. ❤️
 
 
-# Template 🐸TTS Model implementation
+# Template 🐸tts Model implementation
 
 You can start implementing your model by copying the following base class.
 
 ```python
-from TTS.tts.models.base_tts import BaseTTS
+from verbamanent.tts.models.base_tts import Basetts
 
 
-class MyModel(BaseTTS):
+class MyModel(Basetts):
     """
     Notes on input/output tensor shapes:
         Any input or output tensor of the model must be shaped as

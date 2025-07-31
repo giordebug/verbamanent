@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseAudioConfig
-from TTS.tts.configs.shared_configs import BaseDatasetConfig, CapacitronVAEConfig
-from TTS.tts.configs.tacotron2_config import Tacotron2Config
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.tacotron2 import Tacotron2
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.config.shared_configs import BaseAudioConfig
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig, CapacitronVAEConfig
+from verbamanent.tts.configs.tacotron2_config import Tacotron2Config
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.tacotron2 import Tacotron2
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -95,7 +95,7 @@ config = Tacotron2Config(
 
 ap = AudioProcessor(**config.audio.to_dict())
 
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True)
 

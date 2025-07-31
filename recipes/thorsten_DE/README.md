@@ -1,4 +1,4 @@
-# 🐸💬 TTS Thorsten Recipes
+# 🐸💬 tts Thorsten Recipes
 
 For running the recipes you need the [Thorsten-Voice](https://github.com/thorstenMueller/Thorsten-Voice) dataset.
 

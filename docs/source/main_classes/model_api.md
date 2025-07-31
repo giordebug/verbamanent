@@ -2,23 +2,23 @@
 Model API provides you a set of functions that easily make your model compatible with the `Trainer`,
 `Synthesizer` and `ModelZoo`.
 
-## Base TTS Model
+## Base tts Model
 
 ```{eval-rst}
-.. autoclass:: TTS.model.BaseTrainerModel
+.. autoclass:: tts.model.BaseTrainerModel
     :members:
 ```
 
 ## Base tts Model
 
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.base_tts.BaseTTS
+.. autoclass:: tts.tts.models.base_tts.Basetts
     :members:
 ```
 
 ## Base vocoder Model
 
 ```{eval-rst}
-.. autoclass:: TTS.vocoder.models.base_vocoder.BaseVocoder
+.. autoclass:: tts.vocoder.models.base_vocoder.BaseVocoder
     :members:
 ```

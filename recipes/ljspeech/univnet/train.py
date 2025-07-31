@@ -1,11 +1,11 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.utils.audio import AudioProcessor
-from TTS.vocoder.configs import UnivnetConfig
-from TTS.vocoder.datasets.preprocess import load_wav_data
-from TTS.vocoder.models.gan import GAN
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.vocoder.configs import UnivnetConfig
+from verbamanent.vocoder.datasets.preprocess import load_wav_data
+from verbamanent.vocoder.models.gan import GAN
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 config = UnivnetConfig(

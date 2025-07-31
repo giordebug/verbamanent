@@ -3,10 +3,10 @@ import os
 import torch
 
 from tests import get_tests_input_path, get_tests_output_path, get_tests_path
-from TTS.config import BaseAudioConfig
-from TTS.utils.audio import AudioProcessor
-from TTS.utils.audio.numpy_transforms import stft
-from TTS.vocoder.layers.losses import MelganFeatureLoss, MultiScaleSTFTLoss, STFTLoss, TorchSTFT
+from verbamanent.config import BaseAudioConfig
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.utils.audio.numpy_transforms import stft
+from verbamanent.vocoder.layers.losses import MelganFeatureLoss, MultiScaleSTFTLoss, STFTLoss, TorchSTFT
 
 TESTS_PATH = get_tests_path()
 

@@ -1,15 +1,15 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.layers.xtts.trainer.gpt_trainer import GPTArgs, GPTTrainer, GPTTrainerConfig, XttsAudioConfig
-from TTS.utils.manage import ModelManager
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.layers.xtts.trainer.gpt_trainer import GPTArgs, GPTTrainer, GPTTrainerConfig, XttsAudioConfig
+from verbamanent.utils.manage import ModelManager
 
 # Logging parameters
-RUN_NAME = "GPT_XTTS_LJSpeech_FT"
-PROJECT_NAME = "XTTS_trainer"
+RUN_NAME = "GPT_Xtts_LJSpeech_FT"
+PROJECT_NAME = "Xtts_trainer"
 DASHBOARD_LOGGER = "tensorboard"
 LOGGER_URI = None
 
@@ -35,14 +35,14 @@ config_dataset = BaseDatasetConfig(
 # Add here the configs of the datasets
 DATASETS_CONFIG_LIST = [config_dataset]
 
-# Define the path where XTTS v1.1.1 files will be downloaded
-CHECKPOINTS_OUT_PATH = os.path.join(OUT_PATH, "XTTS_v1.1_original_model_files/")
+# Define the path where Xtts v1.1.1 files will be downloaded
+CHECKPOINTS_OUT_PATH = os.path.join(OUT_PATH, "Xtts_v1.1_original_model_files/")
 os.makedirs(CHECKPOINTS_OUT_PATH, exist_ok=True)
 
 
 # DVAE files
-DVAE_CHECKPOINT_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/XTTS-v1/v1.1.2/dvae.pth"
-MEL_NORM_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/XTTS-v1/v1.1.2/mel_stats.pth"
+DVAE_CHECKPOINT_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/Xtts-v1/v1.1.2/dvae.pth"
+MEL_NORM_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/Xtts-v1/v1.1.2/mel_stats.pth"
 
 # Set the path to the downloaded files
 DVAE_CHECKPOINT = os.path.join(CHECKPOINTS_OUT_PATH, DVAE_CHECKPOINT_LINK.split("/")[-1])
@@ -54,19 +54,19 @@ if not os.path.isfile(DVAE_CHECKPOINT) or not os.path.isfile(MEL_NORM_FILE):
     ModelManager._download_model_files([MEL_NORM_LINK, DVAE_CHECKPOINT_LINK], CHECKPOINTS_OUT_PATH, progress_bar=True)
 
 
-# Download XTTS v1.1 checkpoint if needed
-TOKENIZER_FILE_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/XTTS-v1/v1.1.2/vocab.json"
-XTTS_CHECKPOINT_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/XTTS-v1/v1.1.2/model.pth"
+# Download Xtts v1.1 checkpoint if needed
+TOKENIZER_FILE_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/Xtts-v1/v1.1.2/vocab.json"
+Xtts_CHECKPOINT_LINK = "https://coqui.gateway.scarf.sh/hf-coqui/Xtts-v1/v1.1.2/model.pth"
 
-# XTTS transfer learning parameters: You we need to provide the paths of XTTS model checkpoint that you want to do the fine tuning.
+# Xtts transfer learning parameters: You we need to provide the paths of Xtts model checkpoint that you want to do the fine tuning.
 TOKENIZER_FILE = os.path.join(CHECKPOINTS_OUT_PATH, TOKENIZER_FILE_LINK.split("/")[-1])  # vocab.json file
-XTTS_CHECKPOINT = os.path.join(CHECKPOINTS_OUT_PATH, XTTS_CHECKPOINT_LINK.split("/")[-1])  # model.pth file
+Xtts_CHECKPOINT = os.path.join(CHECKPOINTS_OUT_PATH, Xtts_CHECKPOINT_LINK.split("/")[-1])  # model.pth file
 
-# download XTTS v1.1 files if needed
-if not os.path.isfile(TOKENIZER_FILE) or not os.path.isfile(XTTS_CHECKPOINT):
-    print(" > Downloading XTTS v1.1 files!")
+# download Xtts v1.1 files if needed
+if not os.path.isfile(TOKENIZER_FILE) or not os.path.isfile(Xtts_CHECKPOINT):
+    print(" > Downloading Xtts v1.1 files!")
     ModelManager._download_model_files(
-        [TOKENIZER_FILE_LINK, XTTS_CHECKPOINT_LINK], CHECKPOINTS_OUT_PATH, progress_bar=True
+        [TOKENIZER_FILE_LINK, Xtts_CHECKPOINT_LINK], CHECKPOINTS_OUT_PATH, progress_bar=True
     )
 
 
@@ -88,8 +88,8 @@ def main():
         mel_norm_file=MEL_NORM_FILE,
         dvae_checkpoint=DVAE_CHECKPOINT,
         # tokenizer_file="/raid/datasets/xtts_models/vocab.json", # vocab path of the model that you want to fine-tune
-        # xtts_checkpoint="https://huggingface.co/coqui/XTTS-v1/resolve/hifigan/model.pth",
-        xtts_checkpoint=XTTS_CHECKPOINT,  # checkpoint path of the model that you want to fine-tune
+        # xtts_checkpoint="https://huggingface.co/coqui/Xtts-v1/resolve/hifigan/model.pth",
+        xtts_checkpoint=Xtts_CHECKPOINT,  # checkpoint path of the model that you want to fine-tune
         tokenizer_file=TOKENIZER_FILE,
         gpt_num_audio_tokens=8194,
         gpt_start_audio_token=8192,
@@ -104,7 +104,7 @@ def main():
         run_name=RUN_NAME,
         project_name=PROJECT_NAME,
         run_description="""
-            GPT XTTS training
+            GPT Xtts training
             """,
         dashboard_logger=DASHBOARD_LOGGER,
         logger_uri=LOGGER_URI,

@@ -1,6 +1,6 @@
-# Forward TTS model(s)
+# Forward tts model(s)
 
-A general feed-forward TTS model implementation that can be configured to different architectures by setting different
+A general feed-forward tts model implementation that can be configured to different architectures by setting different
 encoder and decoder networks. It can be trained with either pre-computed durations (from pre-trained Tacotron) or
 an alignment network that learns the text to audio alignment from the input data.
 
@@ -8,7 +8,7 @@ Currently we provide the following pre-configured architectures:
 
 - **FastSpeech:**
 
-    It's a feed-forward model TTS model that uses Feed Forward Transformer (FFT) modules as the encoder and decoder.
+    It's a feed-forward model tts model that uses Feed Forward Transformer (FFT) modules as the encoder and decoder.
 
 - **FastPitch:**
 
@@ -32,33 +32,33 @@ Currently we provide the following pre-configured architectures:
 - What is Pitch: https://www.britannica.com/topic/pitch-speech
 
 
-## ForwardTTSArgs
+## ForwardttsArgs
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.forward_tts.ForwardTTSArgs
+.. autoclass:: tts.tts.models.forward_tts.ForwardttsArgs
     :members:
 ```
 
-## ForwardTTS Model
+## Forwardtts Model
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.forward_tts.ForwardTTS
+.. autoclass:: tts.tts.models.forward_tts.Forwardtts
     :members:
 ```
 
 ## FastPitchConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.fast_pitch_config.FastPitchConfig
+.. autoclass:: tts.tts.configs.fast_pitch_config.FastPitchConfig
     :members:
 ```
 
 ## SpeedySpeechConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.speedy_speech_config.SpeedySpeechConfig
+.. autoclass:: tts.tts.configs.speedy_speech_config.SpeedySpeechConfig
     :members:
 ```
 
 ## FastSpeechConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.fast_speech_config.FastSpeechConfig
+.. autoclass:: tts.tts.configs.fast_speech_config.FastSpeechConfig
     :members:
 ```
 

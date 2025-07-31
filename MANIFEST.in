@@ -3,13 +3,13 @@ include LICENSE.txt
 include requirements.*.txt
 include *.cff
 include requirements.txt
-include TTS/VERSION
-recursive-include TTS *.json
-recursive-include TTS *.html
-recursive-include TTS *.png
-recursive-include TTS *.md
-recursive-include TTS *.py
-recursive-include TTS *.pyx
+include tts/VERSION
+recursive-include tts *.json
+recursive-include tts *.html
+recursive-include tts *.png
+recursive-include tts *.md
+recursive-include tts *.py
+recursive-include tts *.pyx
 recursive-include images *.png
 recursive-exclude tests *
 prune tests*

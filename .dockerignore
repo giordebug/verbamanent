@@ -2,7 +2,7 @@
 Dockerfile
 build/
 dist/
-TTS.egg-info/
+tts.egg-info/
 tests/outputs/*
 tests/train_outputs/*
 __pycache__/

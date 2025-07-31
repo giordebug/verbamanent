@@ -1,6 +1,6 @@
 import unittest
 
-from TTS.tts.utils.text.japanese.phonemizer import japanese_text_to_phonemes
+from verbamanent.tts.utils.text.japanese.phonemizer import japanese_text_to_phonemes
 
 _TEST_CASES = """
 どちらに行きますか？/dochiraniikimasuka?

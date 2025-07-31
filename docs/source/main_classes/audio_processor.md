@@ -1,6 +1,6 @@
 # AudioProcessor API
 
-`TTS.utils.audio.AudioProcessor` is the core class for all the audio processing routines. It provides an API for
+`tts.utils.audio.AudioProcessor` is the core class for all the audio processing routines. It provides an API for
 
 - Feature extraction.
 - Sound normalization.
@@ -9,17 +9,17 @@
 - Normalizing and denormalizing audio signals.
 - Griffin-Lim vocoder.
 
-The `AudioProcessor` needs to be initialized with `TTS.config.shared_configs.BaseAudioConfig`. Any model config
+The `AudioProcessor` needs to be initialized with `tts.config.shared_configs.BaseAudioConfig`. Any model config
 also must inherit or initiate `BaseAudioConfig`.
 
 ## AudioProcessor
 ```{eval-rst}
-.. autoclass:: TTS.utils.audio.AudioProcessor
+.. autoclass:: tts.utils.audio.AudioProcessor
     :members:
 ```
 
 ## BaseAudioConfig
 ```{eval-rst}
-.. autoclass:: TTS.config.shared_configs.BaseAudioConfig
+.. autoclass:: tts.config.shared_configs.BaseAudioConfig
     :members:
 ```

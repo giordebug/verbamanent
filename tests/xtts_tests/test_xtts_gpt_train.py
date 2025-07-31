@@ -2,13 +2,13 @@ import os
 import shutil
 
 import torch
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
 from tests import get_tests_output_path
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.layers.xtts.dvae import DiscreteVAE
-from TTS.tts.layers.xtts.trainer.gpt_trainer import GPTArgs, GPTTrainer, GPTTrainerConfig, XttsAudioConfig
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.layers.xtts.dvae import DiscreteVAE
+from verbamanent.tts.layers.xtts.trainer.gpt_trainer import GPTArgs, GPTTrainer, GPTTrainerConfig, XttsAudioConfig
 
 config_dataset = BaseDatasetConfig(
     formatter="ljspeech",
@@ -22,8 +22,8 @@ config_dataset = BaseDatasetConfig(
 DATASETS_CONFIG_LIST = [config_dataset]
 
 # Logging parameters
-RUN_NAME = "GPT_XTTS_LJSpeech_FT"
-PROJECT_NAME = "XTTS_trainer"
+RUN_NAME = "GPT_Xtts_LJSpeech_FT"
+PROJECT_NAME = "Xtts_trainer"
 DASHBOARD_LOGGER = "tensorboard"
 LOGGER_URI = None
 
@@ -54,9 +54,9 @@ mel_stats = torch.ones(80)
 torch.save(mel_stats, MEL_NORM_FILE)
 
 
-# XTTS transfer learning parameters: You we need to provide the paths of XTTS model checkpoint that you want to do the fine tuning.
+# Xtts transfer learning parameters: You we need to provide the paths of Xtts model checkpoint that you want to do the fine tuning.
 TOKENIZER_FILE = "tests/inputs/xtts_vocab.json"  # vocab.json file
-XTTS_CHECKPOINT = None  # "/raid/edresson/dev/Checkpoints/XTTS_evaluation/xtts_style_emb_repetition_fix_gt/132500_gpt_ema_coqui_tts_with_enhanced_hifigan.pth"  # model.pth file
+Xtts_CHECKPOINT = None  # "/raid/edresson/dev/Checkpoints/Xtts_evaluation/xtts_style_emb_repetition_fix_gt/132500_gpt_ema_coqui_tts_with_enhanced_hifigan.pth"  # model.pth file
 
 
 # Training sentences generations
@@ -83,7 +83,7 @@ model_args = GPTArgs(
     max_text_length=200,
     mel_norm_file=MEL_NORM_FILE,
     dvae_checkpoint=DVAE_CHECKPOINT,
-    xtts_checkpoint=XTTS_CHECKPOINT,  # checkpoint path of the model that you want to fine-tune
+    xtts_checkpoint=Xtts_CHECKPOINT,  # checkpoint path of the model that you want to fine-tune
     tokenizer_file=TOKENIZER_FILE,
     gpt_num_audio_tokens=8194,
     gpt_start_audio_token=8192,
@@ -97,7 +97,7 @@ config = GPTTrainerConfig(
     run_name=RUN_NAME,
     project_name=PROJECT_NAME,
     run_description="""
-        GPT XTTS training
+        GPT Xtts training
         """,
     dashboard_logger=DASHBOARD_LOGGER,
     logger_uri=LOGGER_URI,

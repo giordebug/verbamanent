@@ -14,5 +14,5 @@ RUN apt -y install --no-install-recommends gcc libpython3.10-dev
 
 ADD runtime.sh /a/
 
-WORKDIR /a/TTS/
+WORKDIR /a/tts/
 CMD /a/runtime.sh

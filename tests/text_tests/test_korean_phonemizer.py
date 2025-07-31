@@ -1,6 +1,6 @@
 import unittest
 
-from TTS.tts.utils.text.korean.phonemizer import korean_text_to_phonemes
+from verbamanent.tts.utils.text.korean.phonemizer import korean_text_to_phonemes
 
 _TEST_CASES = """
 포상은 열심히 한 아이에게만 주어지기 때문에 포상인 것입니다./포상으 녈심히 하 나이에게만 주어지기 때무네 포상인 거심니다.

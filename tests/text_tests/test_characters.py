@@ -1,6 +1,6 @@
 import unittest
 
-from TTS.tts.utils.text.characters import BaseCharacters, BaseVocabulary, Graphemes, IPAPhonemes
+from verbamanent.tts.utils.text.characters import BaseCharacters, BaseVocabulary, Graphemes, IPAPhonemes
 
 # pylint: disable=protected-access
 

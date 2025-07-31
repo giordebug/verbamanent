@@ -1,10 +1,10 @@
-# Overflow TTS
+# Overflow tts
 
 Neural HMMs are a type of neural transducer recently proposed for
 sequence-to-sequence modelling in text-to-speech. They combine the best features
-of classic statistical speech synthesis and modern neural TTS, requiring less
+of classic statistical speech synthesis and modern neural tts, requiring less
 data and fewer training updates, and are less prone to gibberish output caused
-by neural attention failures. In this paper, we combine neural HMM TTS with
+by neural attention failures. In this paper, we combine neural HMM tts with
 normalising flows for describing the highly non-Gaussian distribution of speech
 acoustics. The result is a powerful, fully probabilistic model of durations and
 acoustics that can be trained using exact maximum likelihood. Compared to
@@ -18,19 +18,19 @@ are available at https://shivammehta25.github.io/OverFlow/.
 
 ## Important resources & papers
 - HMM: https://de.wikipedia.org/wiki/Hidden_Markov_Model
-- OverflowTTS paper: https://arxiv.org/abs/2211.06892
+- Overflowtts paper: https://arxiv.org/abs/2211.06892
 - Neural HMM: https://arxiv.org/abs/2108.13320
 - Audio Samples: https://shivammehta25.github.io/OverFlow/
 
 
 ## OverflowConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.overflow_config.OverflowConfig
+.. autoclass:: tts.tts.configs.overflow_config.OverflowConfig
     :members:
 ```
 
 ## Overflow Model
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.overflow.Overflow
+.. autoclass:: tts.tts.models.overflow.Overflow
     :members:
 ```

@@ -4,12 +4,12 @@ import unittest
 
 import torch
 
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.utils.data import get_length_balancer_weights
-from TTS.tts.utils.languages import get_language_balancer_weights
-from TTS.tts.utils.speakers import get_speaker_balancer_weights
-from TTS.utils.samplers import BucketBatchSampler, PerfectBatchSampler
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.utils.data import get_length_balancer_weights
+from verbamanent.tts.utils.languages import get_language_balancer_weights
+from verbamanent.tts.utils.speakers import get_speaker_balancer_weights
+from verbamanent.utils.samplers import BucketBatchSampler, PerfectBatchSampler
 
 # Fixing random state to avoid random fails
 torch.manual_seed(0)

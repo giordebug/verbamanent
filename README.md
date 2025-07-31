@@ -1,17 +1,17 @@
 # VerbaManent
 
 > *Words remain.*
-> VerbaManent is an actively maintained open-source neural text-to-speech (TTS) engine.  
-> It continues the work of Coqui-TTS with a renewed focus on quality, accessibility, and performance on consumer-grade hardware.
+> VerbaManent is an actively maintained open-source neural text-to-speech (tts) engine.  
+> It continues the work of Coqui-tts with a renewed focus on quality, accessibility, and performance on consumer-grade hardware.
 
 ---
 
 ## ✨ Project Goals
 
-- preserve access to a functional and free TTS engine
+- preserve access to a functional and free tts engine
 - ensure long-term maintainability and stability
 - refactor and modularize the codebase for clarity and reuse
-- provide an ethical, open alternative to commercial TTS APIs
+- provide an ethical, open alternative to commercial tts APIs
 
 ---
 
@@ -25,7 +25,7 @@
 ## 🛠 Key Features
 
 - Multi-speaker and multi-language synthesis
-- Support for XTTS2, Tacotron, Glow-TTS, VITS, SpeedySpeech, and more
+- Support for Xtts2, Tacotron, Glow-tts, VITS, SpeedySpeech, and more
 - Integrated vocoders (HiFi-GAN, WaveGrad, MelGAN, etc.)
 - Fine-tuning on custom datasets
 - Voice cloning and voice conversion

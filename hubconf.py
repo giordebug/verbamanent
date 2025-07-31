@@ -3,14 +3,14 @@ dependencies = [
 ]
 import torch
 
-from TTS.utils.manage import ModelManager
-from TTS.utils.synthesizer import Synthesizer
+from verbamanent.utils.manage import ModelManager
+from verbamanent.utils.synthesizer import Synthesizer
 
 
 def tts(model_name='tts_models/en/ljspeech/tacotron2-DCA',
         vocoder_name=None,
         use_cuda=False):
-    """TTS entry point for PyTorch Hub that provides a Synthesizer object to synthesize speech from a give text.
+    """tts entry point for PyTorch Hub that provides a Synthesizer object to synthesize speech from a give text.
 
     Example:
         >>> synthesizer = torch.hub.load('giordebug/verbamanent', 'tts', source='github')
@@ -23,7 +23,7 @@ def tts(model_name='tts_models/en/ljspeech/tacotron2-DCA',
         pretrained (bool, optional): [description]. Defaults to True.
 
     Returns:
-        TTS.utils.synthesizer.Synthesizer: Synthesizer object wrapping both vocoder and tts models.
+        tts.utils.synthesizer.Synthesizer: Synthesizer object wrapping both vocoder and tts models.
     """
     manager = ModelManager()
 

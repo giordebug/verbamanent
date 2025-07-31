@@ -2,7 +2,7 @@ import os
 import unittest
 import warnings
 
-from TTS.tts.utils.text.belarusian.phonemizer import belarusian_text_to_phonemes
+from verbamanent.tts.utils.text.belarusian.phonemizer import belarusian_text_to_phonemes
 
 _TEST_CASES = """
 Фанетычны канвертар/fanʲɛˈtɨt͡ʂnɨ kanˈvʲɛrtar

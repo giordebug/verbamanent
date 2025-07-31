@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from TTS.vocoder.models.parallel_wavegan_discriminator import (
+from verbamanent.vocoder.models.parallel_wavegan_discriminator import (
     ParallelWaveganDiscriminator,
     ResidualParallelWaveganDiscriminator,
 )

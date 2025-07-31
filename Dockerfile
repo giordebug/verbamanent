@@ -9,7 +9,7 @@ RUN pip3 install llvmlite --ignore-installed
 RUN pip3 install torch torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
 RUN rm -rf /root/.cache/pip
 
-# Copy TTS repository contents:
+# Copy tts repository contents:
 WORKDIR /root
 COPY . /root
 

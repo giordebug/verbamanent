@@ -1,11 +1,11 @@
 import torch
 
-from TTS.tts.configs.delightful_tts_config import DelightfulTTSConfig
-from TTS.tts.layers.delightful_tts.acoustic_model import AcousticModel
-from TTS.tts.models.delightful_tts import DelightfulTtsArgs, VocoderConfig
-from TTS.tts.utils.helpers import rand_segments
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.vocoder.models.hifigan_generator import HifiganGenerator
+from verbamanent.tts.configs.delightful_tts_config import DelightfulttsConfig
+from verbamanent.tts.layers.delightful_tts.acoustic_model import AcousticModel
+from verbamanent.tts.models.delightful_tts import DelightfulTtsArgs, VocoderConfig
+from verbamanent.tts.utils.helpers import rand_segments
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.vocoder.models.hifigan_generator import HifiganGenerator
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -13,7 +13,7 @@ args = DelightfulTtsArgs()
 v_args = VocoderConfig()
 
 
-config = DelightfulTTSConfig(
+config = DelightfulttsConfig(
     model_args=args,
     # compute_f0=True,
     # f0_cache_path=os.path.join(output_path, "f0_cache"),
@@ -23,7 +23,7 @@ config = DelightfulTTSConfig(
     # phoneme_cache_path=os.path.join(output_path, "phoneme_cache"),
 )
 
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 
 def test_acoustic_model():

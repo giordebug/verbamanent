@@ -1,6 +1,6 @@
 import torch as T
 
-from TTS.tts.utils.helpers import average_over_durations, generate_path, rand_segments, segment, sequence_mask
+from verbamanent.tts.utils.helpers import average_over_durations, generate_path, rand_segments, segment, sequence_mask
 
 
 def average_over_durations_test():  # pylint: disable=no-self-use

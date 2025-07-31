@@ -17,12 +17,12 @@ def sync_readme():
     args = ap.parse_args()
     readme_path = Path(__file__).parent.parent / "README.md"
     orig_content = readme_path.read_text()
-    from TTS.bin.synthesize import description
+    from verbamanent.bin.synthesize import description
 
     new_content = replace_between_markers(orig_content, "tts-readme", description.strip())
     if args.check:
         if orig_content != new_content:
-            print("README.md is out of sync; please edit TTS/bin/TTS_README.md and run scripts/sync_readme.py")
+            print("README.md is out of sync; please edit tts/bin/tts_README.md and run scripts/sync_readme.py")
             exit(42)
     readme_path.write_text(new_content)
     print("Updated README.md")

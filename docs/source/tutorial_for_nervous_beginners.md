@@ -5,20 +5,20 @@
 User friendly installation. Recommended only for synthesizing voice.
 
 ```bash
-$ pip install TTS
+$ pip install tts
 ```
 
 Developer friendly installation.
 
 ```bash
 $ git clone https://github.com/giordebug/verbamanent
-$ cd TTS
+$ cd tts
 $ pip install -e .
 ```
 
 ## Training a `tts` Model
 
-A breakdown of a simple script that trains a GlowTTS model on the LJspeech dataset. See the comments for more details.
+A breakdown of a simple script that trains a Glowtts model on the LJspeech dataset. See the comments for more details.
 
 ### Pure Python Way
 
@@ -27,7 +27,7 @@ A breakdown of a simple script that trains a GlowTTS model on the LJspeech datas
     In this example, we download and use the LJSpeech dataset. Set the download directory based on your preferences.
 
     ```bash
-    $ python -c 'from TTS.utils.downloaders import download_ljspeech; download_ljspeech("../recipes/ljspeech/");'
+    $ python -c 'from verbamanent.utils.downloaders import download_ljspeech; download_ljspeech("../recipes/ljspeech/");'
     ```
 
 1. Define `train.py`.
@@ -90,7 +90,7 @@ We still support running training from CLI like in the old days. The same traini
 
 2. Start training.
     ```bash
-    $ CUDA_VISIBLE_DEVICES="0" python TTS/bin/train_tts.py --config_path config.json
+    $ CUDA_VISIBLE_DEVICES="0" python tts/bin/train_tts.py --config_path config.json
     ```
 
 ## Training a `vocoder` Model

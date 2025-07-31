@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config import BaseAudioConfig, BaseDatasetConfig
-from TTS.tts.configs.speedy_speech_config import SpeedySpeechConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.forward_tts import ForwardTTS
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.config import BaseAudioConfig, BaseDatasetConfig
+from verbamanent.tts.configs.speedy_speech_config import SpeedySpeechConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.forward_tts import Forwardtts
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 dataset_config = BaseDatasetConfig(formatter="vctk", meta_file_train="", path=os.path.join(output_path, "../VCTK/"))
@@ -62,13 +62,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # If characters are not defined in the config, default characters are passed to the config
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,
@@ -83,10 +83,10 @@ speaker_manager.set_ids_from_data(train_samples + eval_samples, parse_key="speak
 config.model_args.num_speakers = speaker_manager.num_speakers
 
 # init model
-model = ForwardTTS(config, ap, tokenizer, speaker_manager)
+model = Forwardtts(config, ap, tokenizer, speaker_manager)
 
 # INITIALIZE THE TRAINER
-# Trainer provides a generic API to train all the 🐸TTS models with all its perks like mixed-precision training,
+# Trainer provides a generic API to train all the 🐸tts models with all its perks like mixed-precision training,
 # distributed training, etc.
 trainer = Trainer(
     TrainerArgs(), config, output_path, model=model, train_samples=train_samples, eval_samples=eval_samples

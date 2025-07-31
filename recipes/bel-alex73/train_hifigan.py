@@ -1,13 +1,13 @@
 import os
 
 from coqpit import Coqpit
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.tts.configs.shared_configs import BaseAudioConfig
-from TTS.utils.audio import AudioProcessor
-from TTS.vocoder.configs.hifigan_config import *
-from TTS.vocoder.datasets.preprocess import load_wav_data
-from TTS.vocoder.models.gan import GAN
+from verbamanent.tts.configs.shared_configs import BaseAudioConfig
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.vocoder.configs.hifigan_config import *
+from verbamanent.vocoder.datasets.preprocess import load_wav_data
+from verbamanent.vocoder.models.gan import GAN
 
 output_path = "/storage/output-hifigan/"
 
@@ -15,7 +15,7 @@ audio_config = BaseAudioConfig(
     mel_fmin=50,
     mel_fmax=8000,
     hop_length=256,
-    stats_path="/storage/TTS/scale_stats.npy",
+    stats_path="/storage/tts/scale_stats.npy",
 )
 
 config = HifiganConfig(

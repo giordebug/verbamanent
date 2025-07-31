@@ -17,7 +17,7 @@
 
 .. toctree::
     :maxdepth: 2
-    :caption: Using 🐸TTS
+    :caption: Using 🐸tts
 
     inference
     docker_images

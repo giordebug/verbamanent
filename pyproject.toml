@@ -2,7 +2,6 @@
 requires = [
     "setuptools",
     "wheel",
-    "cython~=0.29.30",
     "numpy>=1.22.0",
     "packaging",
 ]
@@ -18,3 +17,6 @@ target-version = ['py39']
 line_length = 120
 profile = "black"
 multi_line_output = 3
+
+
+# removed   "cython~=0.29.30",

@@ -19,11 +19,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 autodoc_mock_imports = ["soundfile"]
 
 # -- Project information -----------------------------------------------------
-project = 'TTS'
+project = 'tts'
 copyright = "2025 VerbaManent, Michele Giordano"
 author = 'Michele Giordano'
 
-with open("../../TTS/VERSION", "r") as ver:
+with open("../../tts/VERSION", "r") as ver:
     version = ver.read().strip()
 
 # The version info for the project you're documenting, acts as replacement for
@@ -95,7 +95,7 @@ napoleon_custom_sections = [('Shapes', 'shape')]
 # a list of builtin themes.
 #
 html_theme = 'furo'
-html_tite = "TTS"
+html_tite = "tts"
 html_theme_options = {
     "light_logo": "logo.png",
     "dark_logo": "logo.png",

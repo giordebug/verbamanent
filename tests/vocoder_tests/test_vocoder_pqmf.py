@@ -5,7 +5,7 @@ import torch
 from librosa.core import load
 
 from tests import get_tests_input_path, get_tests_output_path, get_tests_path
-from TTS.vocoder.layers.pqmf import PQMF
+from verbamanent.vocoder.layers.pqmf import PQMF
 
 TESTS_PATH = get_tests_path()
 WAV_FILE = os.path.join(get_tests_input_path(), "example_1.wav")

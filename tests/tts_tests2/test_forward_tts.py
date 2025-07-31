@@ -1,13 +1,13 @@
 import torch as T
 
-from TTS.tts.models.forward_tts import ForwardTTS, ForwardTTSArgs
-from TTS.tts.utils.helpers import sequence_mask
+from verbamanent.tts.models.forward_tts import Forwardtts, ForwardttsArgs
+from verbamanent.tts.utils.helpers import sequence_mask
 
 # pylint: disable=unused-variable
 
 
 def expand_encoder_outputs_test():
-    model = ForwardTTS(ForwardTTSArgs(num_chars=10))
+    model = Forwardtts(ForwardttsArgs(num_chars=10))
 
     inputs = T.rand(2, 5, 57)
     durations = T.randint(1, 4, (2, 57))
@@ -32,7 +32,7 @@ def model_input_output_test():
     """Assert the output shapes of the model in different modes"""
 
     # VANILLA MODEL
-    model = ForwardTTS(ForwardTTSArgs(num_chars=10, use_pitch=False, use_aligner=False))
+    model = Forwardtts(ForwardttsArgs(num_chars=10, use_pitch=False, use_aligner=False))
 
     x = T.randint(0, 10, (2, 21))
     x_lengths = T.randint(10, 22, (2,))
@@ -60,7 +60,7 @@ def model_input_output_test():
     assert outputs["pitch_avg_gt"] is None
 
     # USE PITCH
-    model = ForwardTTS(ForwardTTSArgs(num_chars=10, use_pitch=True, use_aligner=False))
+    model = Forwardtts(ForwardttsArgs(num_chars=10, use_pitch=True, use_aligner=False))
 
     x = T.randint(0, 10, (2, 21))
     x_lengths = T.randint(10, 22, (2,))
@@ -89,7 +89,7 @@ def model_input_output_test():
     assert outputs["o_alignment_dur"] is None
 
     # USE ALIGNER NETWORK
-    model = ForwardTTS(ForwardTTSArgs(num_chars=10, use_pitch=False, use_aligner=True))
+    model = Forwardtts(ForwardttsArgs(num_chars=10, use_pitch=False, use_aligner=True))
 
     x = T.randint(0, 10, (2, 21))
     x_lengths = T.randint(10, 22, (2,))
@@ -118,7 +118,7 @@ def model_input_output_test():
     assert outputs["pitch_avg_gt"] is None
 
     # USE ALIGNER NETWORK AND PITCH
-    model = ForwardTTS(ForwardTTSArgs(num_chars=10, use_pitch=True, use_aligner=True))
+    model = Forwardtts(ForwardttsArgs(num_chars=10, use_pitch=True, use_aligner=True))
 
     x = T.randint(0, 10, (2, 21))
     x_lengths = T.randint(10, 22, (2,))

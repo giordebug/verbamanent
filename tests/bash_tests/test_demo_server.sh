@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 
-python -m TTS.server.server &
+python -m tts.server.server &
 SERVER_PID=$!
 
 echo 'Waiting for server...'

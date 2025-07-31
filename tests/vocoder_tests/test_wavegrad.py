@@ -4,8 +4,8 @@ import numpy as np
 import torch
 from torch import optim
 
-from TTS.vocoder.configs import WavegradConfig
-from TTS.vocoder.models.wavegrad import Wavegrad, WavegradArgs
+from verbamanent.vocoder.configs import WavegradConfig
+from verbamanent.vocoder.models.wavegrad import Wavegrad, WavegradArgs
 
 # pylint: disable=unused-variable
 

@@ -2,9 +2,9 @@ import unittest
 
 from packaging.version import Version
 
-from TTS.tts.utils.text.phonemizers import ESpeak, Gruut, JA_JP_Phonemizer, ZH_CN_Phonemizer
-from TTS.tts.utils.text.phonemizers.bangla_phonemizer import BN_Phonemizer
-from TTS.tts.utils.text.phonemizers.multi_phonemizer import MultiPhonemizer
+from verbamanent.tts.utils.text.phonemizers import ESpeak, Gruut, JA_JP_Phonemizer, ZH_CN_Phonemizer
+from verbamanent.tts.utils.text.phonemizers.bangla_phonemizer import BN_Phonemizer
+from verbamanent.tts.utils.text.phonemizers.multi_phonemizer import MultiPhonemizer
 
 EXAMPLE_TEXTs = [
     "Recent research at Harvard has shown meditating",

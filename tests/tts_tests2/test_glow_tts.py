@@ -4,14 +4,14 @@ import unittest
 
 import torch
 from torch import optim
-from trainer.logging.tensorboard_logger import TensorboardLogger
+#from trainer.logging.tensorboard_logger import TensorboardLogger
 
 from tests import get_tests_data_path, get_tests_input_path, get_tests_output_path
-from TTS.tts.configs.glow_tts_config import GlowTTSConfig
-from TTS.tts.layers.losses import GlowTTSLoss
-from TTS.tts.models.glow_tts import GlowTTS
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.utils.audio import AudioProcessor
+from verbamanent.tts.configs.glow_tts_config import GlowttsConfig
+from verbamanent.tts.layers.losses import GlowttsLoss
+from verbamanent.tts.models.glow_tts import Glowtts
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.utils.audio import AudioProcessor
 
 # pylint: disable=unused-variable
 
@@ -19,7 +19,7 @@ torch.manual_seed(1)
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-c = GlowTTSConfig()
+c = GlowttsConfig()
 
 ap = AudioProcessor(**c.audio)
 WAV_FILE = os.path.join(get_tests_input_path(), "example_1.wav")
@@ -31,7 +31,7 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
-class TestGlowTTS(unittest.TestCase):
+class TestGlowtts(unittest.TestCase):
     @staticmethod
     def _create_inputs(batch_size=8):
         input_dummy = torch.randint(0, 24, (batch_size, 128)).long().to(device)
@@ -52,8 +52,8 @@ class TestGlowTTS(unittest.TestCase):
             count += 1
 
     def test_init_multispeaker(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config)
         # speaker embedding with default speaker_embedding_dim
         config.use_speaker_embedding = True
         config.num_speakers = 5
@@ -61,45 +61,45 @@ class TestGlowTTS(unittest.TestCase):
         model.init_multispeaker(config)
         self.assertEqual(model.c_in_channels, model.hidden_channels_enc)
         # use external speaker embeddings with speaker_embedding_dim = 301
-        config = GlowTTSConfig(num_chars=32)
+        config = GlowttsConfig(num_chars=32)
         config.use_d_vector_file = True
         config.d_vector_dim = 301
-        model = GlowTTS(config)
+        model = Glowtts(config)
         model.init_multispeaker(config)
         self.assertEqual(model.c_in_channels, 301)
         # use speaker embedddings by the provided speaker_manager
-        config = GlowTTSConfig(num_chars=32)
+        config = GlowttsConfig(num_chars=32)
         config.use_speaker_embedding = True
         config.speakers_file = os.path.join(get_tests_data_path(), "ljspeech", "speakers.json")
         speaker_manager = SpeakerManager.init_from_config(config)
-        model = GlowTTS(config)
+        model = Glowtts(config)
         model.speaker_manager = speaker_manager
         model.init_multispeaker(config)
         self.assertEqual(model.c_in_channels, model.hidden_channels_enc)
         self.assertEqual(model.num_speakers, speaker_manager.num_speakers)
         # use external speaker embeddings by the provided speaker_manager
-        config = GlowTTSConfig(num_chars=32)
+        config = GlowttsConfig(num_chars=32)
         config.use_d_vector_file = True
         config.d_vector_dim = 256
         config.d_vector_file = os.path.join(get_tests_data_path(), "dummy_speakers.json")
         speaker_manager = SpeakerManager.init_from_config(config)
-        model = GlowTTS(config)
+        model = Glowtts(config)
         model.speaker_manager = speaker_manager
         model.init_multispeaker(config)
         self.assertEqual(model.c_in_channels, speaker_manager.embedding_dim)
         self.assertEqual(model.num_speakers, speaker_manager.num_speakers)
 
     def test_unlock_act_norm_layers(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         model.unlock_act_norm_layers()
         for f in model.decoder.flows:
             if getattr(f, "set_ddi", False):
                 self.assertFalse(f.initialized)
 
     def test_lock_act_norm_layers(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         model.lock_act_norm_layers()
         for f in model.decoder.flows:
             if getattr(f, "set_ddi", False):
@@ -108,10 +108,10 @@ class TestGlowTTS(unittest.TestCase):
     def _test_forward(self, batch_size):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         # create model
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         model.train()
-        print(" > Num parameters for GlowTTS model:%s" % (count_parameters(model)))
+        print(" > Num parameters for Glowtts model:%s" % (count_parameters(model)))
         # inference encoder and decoder with MAS
         y = model.forward(input_dummy, input_lengths, mel_spec, mel_lengths)
         self.assertEqual(y["z"].shape, mel_spec.shape)
@@ -130,15 +130,15 @@ class TestGlowTTS(unittest.TestCase):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         d_vector = torch.rand(batch_size, 256).to(device)
         # create model
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             use_d_vector_file=True,
             d_vector_dim=256,
             d_vector_file=os.path.join(get_tests_data_path(), "dummy_speakers.json"),
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         model.train()
-        print(" > Num parameters for GlowTTS model:%s" % (count_parameters(model)))
+        print(" > Num parameters for Glowtts model:%s" % (count_parameters(model)))
         # inference encoder and decoder with MAS
         y = model.forward(input_dummy, input_lengths, mel_spec, mel_lengths, {"d_vectors": d_vector})
         self.assertEqual(y["z"].shape, mel_spec.shape)
@@ -157,14 +157,14 @@ class TestGlowTTS(unittest.TestCase):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         speaker_ids = torch.randint(0, 24, (batch_size,)).long().to(device)
         # create model
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             use_speaker_embedding=True,
             num_speakers=24,
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         model.train()
-        print(" > Num parameters for GlowTTS model:%s" % (count_parameters(model)))
+        print(" > Num parameters for Glowtts model:%s" % (count_parameters(model)))
         # inference encoder and decoder with MAS
         y = model.forward(input_dummy, input_lengths, mel_spec, mel_lengths, {"speaker_ids": speaker_ids})
         self.assertEqual(y["z"].shape, mel_spec.shape)
@@ -191,8 +191,8 @@ class TestGlowTTS(unittest.TestCase):
 
     def _test_inference(self, batch_size):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         model.eval()
         outputs = model.inference(input_dummy, {"x_lengths": input_lengths})
         self._assert_inference_outputs(outputs, input_dummy, mel_spec)
@@ -204,13 +204,13 @@ class TestGlowTTS(unittest.TestCase):
     def _test_inference_with_d_vector(self, batch_size):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         d_vector = torch.rand(batch_size, 256).to(device)
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             use_d_vector_file=True,
             d_vector_dim=256,
             d_vector_file=os.path.join(get_tests_data_path(), "dummy_speakers.json"),
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         model.eval()
         outputs = model.inference(input_dummy, {"x_lengths": input_lengths, "d_vectors": d_vector})
         self._assert_inference_outputs(outputs, input_dummy, mel_spec)
@@ -223,12 +223,12 @@ class TestGlowTTS(unittest.TestCase):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         speaker_ids = torch.randint(0, 24, (batch_size,)).long().to(device)
         # create model
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             use_speaker_embedding=True,
             num_speakers=24,
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         outputs = model.inference(input_dummy, {"x_lengths": input_lengths, "speaker_ids": speaker_ids})
         self._assert_inference_outputs(outputs, input_dummy, mel_spec)
 
@@ -239,15 +239,15 @@ class TestGlowTTS(unittest.TestCase):
     def _test_inference_with_MAS(self, batch_size):
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
         # create model
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         model.eval()
         # inference encoder and decoder with MAS
         y = model.inference_with_MAS(input_dummy, input_lengths, mel_spec, mel_lengths)
         y2 = model.decoder_inference(mel_spec, mel_lengths)
         assert (
             y2["model_outputs"].shape == y["model_outputs"].shape
-        ), "Difference between the shapes of the glowTTS inference with MAS ({}) and the inference using only the decoder ({}) !!".format(
+        ), "Difference between the shapes of the glowtts inference with MAS ({}) and the inference using only the decoder ({}) !!".format(
             y["model_outputs"].shape, y2["model_outputs"].shape
         )
 
@@ -258,14 +258,14 @@ class TestGlowTTS(unittest.TestCase):
     def test_train_step(self):
         batch_size = BATCH_SIZE
         input_dummy, input_lengths, mel_spec, mel_lengths, speaker_ids = self._create_inputs(batch_size)
-        criterion = GlowTTSLoss()
+        criterion = GlowttsLoss()
         # model to train
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS(config).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts(config).to(device)
         # reference model to compare model weights
-        model_ref = GlowTTS(config).to(device)
+        model_ref = Glowtts(config).to(device)
         model.train()
-        print(" > Num parameters for GlowTTS model:%s" % (count_parameters(model)))
+        print(" > Num parameters for Glowtts model:%s" % (count_parameters(model)))
         # pass the state to ref model
         model_ref.load_state_dict(copy.deepcopy(model.state_dict()))
         count = 0
@@ -302,8 +302,8 @@ class TestGlowTTS(unittest.TestCase):
         batch["mel_input"] = mel_spec
         batch["d_vectors"] = None
         batch["speaker_ids"] = None
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         model.run_data_dep_init = False
         model.train()
         logger = TensorboardLogger(
@@ -316,8 +316,8 @@ class TestGlowTTS(unittest.TestCase):
         logger.finish()
 
     def test_test_run(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         model.run_data_dep_init = False
         model.eval()
         test_figures, test_audios = model.test_run(None)
@@ -326,8 +326,8 @@ class TestGlowTTS(unittest.TestCase):
 
     def test_load_checkpoint(self):
         chkp_path = os.path.join(get_tests_output_path(), "dummy_glow_tts_checkpoint.pth")
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         chkp = {}
         chkp["model"] = model.state_dict()
         torch.save(chkp, chkp_path)
@@ -337,42 +337,42 @@ class TestGlowTTS(unittest.TestCase):
         self.assertFalse(model.training)
 
     def test_get_criterion(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         criterion = model.get_criterion()
         self.assertTrue(criterion is not None)
 
     def test_init_from_config(self):
-        config = GlowTTSConfig(num_chars=32)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
 
-        config = GlowTTSConfig(num_chars=32, num_speakers=2)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32, num_speakers=2)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         self.assertTrue(model.num_speakers == 2)
         self.assertTrue(not hasattr(model, "emb_g"))
 
-        config = GlowTTSConfig(num_chars=32, num_speakers=2, use_speaker_embedding=True)
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        config = GlowttsConfig(num_chars=32, num_speakers=2, use_speaker_embedding=True)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         self.assertTrue(model.num_speakers == 2)
         self.assertTrue(hasattr(model, "emb_g"))
 
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             num_speakers=2,
             use_speaker_embedding=True,
             speakers_file=os.path.join(get_tests_data_path(), "ljspeech", "speakers.json"),
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         self.assertTrue(model.num_speakers == 10)
         self.assertTrue(hasattr(model, "emb_g"))
 
-        config = GlowTTSConfig(
+        config = GlowttsConfig(
             num_chars=32,
             use_d_vector_file=True,
             d_vector_dim=256,
             d_vector_file=os.path.join(get_tests_data_path(), "dummy_speakers.json"),
         )
-        model = GlowTTS.init_from_config(config, verbose=False).to(device)
+        model = Glowtts.init_from_config(config, verbose=False).to(device)
         self.assertTrue(model.num_speakers == 1)
         self.assertTrue(not hasattr(model, "emb_g"))
         self.assertTrue(model.c_in_channels == config.d_vector_dim)

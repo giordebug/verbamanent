@@ -6,10 +6,10 @@ import shutil
 import torch
 
 from tests import get_tests_data_path, get_tests_output_path, run_cli
-from TTS.tts.utils.languages import LanguageManager
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.utils.generic_utils import get_user_data_dir
-from TTS.utils.manage import ModelManager
+from verbamanent.tts.utils.languages import LanguageManager
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.utils.generic_utils import get_user_data_dir
+from verbamanent.utils.manage import ModelManager
 
 MODELS_WITH_SEP_TESTS = [
     "tts_models/multilingual/multi-dataset/bark",
@@ -75,7 +75,7 @@ def run_models(offset=0, step=1):
 
 
 def test_xtts():
-    """XTTS is too big to run on github actions. We need to test it locally"""
+    """Xtts is too big to run on github actions. We need to test it locally"""
     output_path = os.path.join(get_tests_output_path(), "output.wav")
     speaker_wav = os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0001.wav")
     use_gpu = torch.cuda.is_available()
@@ -97,8 +97,8 @@ def test_xtts():
 
 def test_xtts_streaming():
     """Testing the new inference_stream method"""
-    from TTS.tts.configs.xtts_config import XttsConfig
-    from TTS.tts.models.xtts import Xtts
+    from verbamanent.tts.configs.xtts_config import XttsConfig
+    from verbamanent.tts.models.xtts import Xtts
 
     speaker_wav = [os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0001.wav")]
     speaker_wav_2 = os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0002.wav")
@@ -129,7 +129,7 @@ def test_xtts_streaming():
 
 
 def test_xtts_v2():
-    """XTTS is too big to run on github actions. We need to test it locally"""
+    """Xtts is too big to run on github actions. We need to test it locally"""
     output_path = os.path.join(get_tests_output_path(), "output.wav")
     speaker_wav = os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0001.wav")
     speaker_wav_2 = os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0002.wav")
@@ -152,8 +152,8 @@ def test_xtts_v2():
 
 def test_xtts_v2_streaming():
     """Testing the new inference_stream method"""
-    from TTS.tts.configs.xtts_config import XttsConfig
-    from TTS.tts.models.xtts import Xtts
+    from verbamanent.tts.configs.xtts_config import XttsConfig
+    from verbamanent.tts.models.xtts import Xtts
 
     speaker_wav = [os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0001.wav")]
     model_path = os.path.join(get_user_data_dir("tts"), "tts_models--multilingual--multi-dataset--xtts_v2")
@@ -241,7 +241,7 @@ def test_bark():
 
 
 def test_voice_conversion():
-    print(" > Run voice conversion inference using YourTTS model.")
+    print(" > Run voice conversion inference using Yourtts model.")
     model_name = "tts_models/multilingual/multi-dataset/your_tts"
     language_id = "en"
     speaker_wav = os.path.join(get_tests_data_path(), "ljspeech", "wavs", "LJ001-0001.wav")

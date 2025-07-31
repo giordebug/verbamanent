@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config import BaseAudioConfig, BaseDatasetConfig
-from TTS.tts.configs.fast_speech_config import FastSpeechConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.forward_tts import ForwardTTS
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
-from TTS.utils.manage import ModelManager
+from verbamanent.config import BaseAudioConfig, BaseDatasetConfig
+from verbamanent.tts.configs.fast_speech_config import FastSpeechConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.forward_tts import Forwardtts
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.utils.manage import ModelManager
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -64,7 +64,7 @@ if not config.model_args.use_aligner:
     model_path, config_path, _ = manager.download_model("tts_models/en/ljspeech/tacotron2-DCA")
     # TODO: make compute_attention python callable
     os.system(
-        f"python TTS/bin/compute_attention_masks.py --model_path {model_path} --config_path {config_path} --dataset ljspeech --dataset_metafile metadata.csv --data_path ./recipes/ljspeech/LJSpeech-1.1/  --use_cuda true"
+        f"python tts/bin/compute_attention_masks.py --model_path {model_path} --config_path {config_path} --dataset ljspeech --dataset_metafile metadata.csv --data_path ./recipes/ljspeech/LJSpeech-1.1/  --use_cuda true"
     )
 
 # INITIALIZE THE AUDIO PROCESSOR
@@ -75,13 +75,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # If characters are not defined in the config, default characters are passed to the config
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,
@@ -90,7 +90,7 @@ train_samples, eval_samples = load_tts_samples(
 )
 
 # init the model
-model = ForwardTTS(config, ap, tokenizer)
+model = Forwardtts(config, ap, tokenizer)
 
 # init the trainer and 🚀
 trainer = Trainer(

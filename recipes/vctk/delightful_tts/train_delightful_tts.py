@@ -1,14 +1,14 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.delightful_tts_config import DelightfulTtsAudioConfig, DelightfulTTSConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.delightful_tts import DelightfulTTS, DelightfulTtsArgs, VocoderConfig
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio.processor import AudioProcessor
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.delightful_tts_config import DelightfulTtsAudioConfig, DelightfulttsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.delightful_tts import Delightfultts, DelightfulTtsArgs, VocoderConfig
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio.processor import AudioProcessor
 
 data_path = "/raid/datasets/vctk_v092_48khz_removed_silence_silero_vad"
 output_path = os.path.dirname(os.path.abspath(__file__))
@@ -24,7 +24,7 @@ model_args = DelightfulTtsArgs()
 
 vocoder_config = VocoderConfig()
 
-something_tts_config = DelightfulTTSConfig(
+something_tts_config = DelightfulttsConfig(
     run_name="delightful_tts_vctk",
     run_description="Train like in delightful tts paper.",
     model_args=model_args,
@@ -57,7 +57,7 @@ something_tts_config = DelightfulTTSConfig(
     steps_to_start_discriminator=10000,
 )
 
-tokenizer, config = TTSTokenizer.init_from_config(something_tts_config)
+tokenizer, config = ttsTokenizer.init_from_config(something_tts_config)
 
 ap = AudioProcessor.init_from_config(config)
 
@@ -75,7 +75,7 @@ speaker_manager.set_ids_from_data(train_samples + eval_samples, parse_key="speak
 config.model_args.num_speakers = speaker_manager.num_speakers
 
 
-model = DelightfulTTS(ap=ap, config=config, tokenizer=tokenizer, speaker_manager=speaker_manager, emotion_manager=None)
+model = Delightfultts(ap=ap, config=config, tokenizer=tokenizer, speaker_manager=speaker_manager, emotion_manager=None)
 
 trainer = Trainer(
     TrainerArgs(), config, output_path, model=model, train_samples=train_samples, eval_samples=eval_samples

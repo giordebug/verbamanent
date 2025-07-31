@@ -3,7 +3,7 @@ import os
 import shutil
 
 from tests import get_device_id, get_tests_output_path, run_cli
-from TTS.vocoder.configs import MultibandMelganConfig
+from verbamanent.vocoder.configs import MultibandMelganConfig
 
 config_path = os.path.join(get_tests_output_path(), "test_vocoder_config.json")
 output_path = os.path.join(get_tests_output_path(), "train_outputs")
@@ -30,7 +30,7 @@ config.audio.trim_db = 60
 config.save_json(config_path)
 
 # train the model for one epoch
-command_train = f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_vocoder.py --config_path {config_path} "
+command_train = f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_vocoder.py --config_path {config_path} "
 run_cli(command_train)
 
 # Find latest folder
@@ -38,7 +38,7 @@ continue_path = max(glob.glob(os.path.join(output_path, "*/")), key=os.path.getm
 
 # restore the model and continue training for one more epoch
 command_train = (
-    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_vocoder.py --continue_path {continue_path} "
+    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_vocoder.py --continue_path {continue_path} "
 )
 run_cli(command_train)
 shutil.rmtree(continue_path)

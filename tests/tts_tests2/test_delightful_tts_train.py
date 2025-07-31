@@ -3,12 +3,12 @@ import json
 import os
 import shutil
 
-from trainer import get_last_checkpoint
+#from trainer import get_last_checkpoint
 
 from tests import get_device_id, get_tests_output_path, run_cli
-from TTS.config.shared_configs import BaseAudioConfig
-from TTS.tts.configs.delightful_tts_config import DelightfulTTSConfig
-from TTS.tts.models.delightful_tts import DelightfulTtsArgs, DelightfulTtsAudioConfig, VocoderConfig
+from verbamanent.config.shared_configs import BaseAudioConfig
+from verbamanent.tts.configs.delightful_tts_config import DelightfulttsConfig
+from verbamanent.tts.models.delightful_tts import DelightfulTtsArgs, DelightfulTtsAudioConfig, VocoderConfig
 
 config_path = os.path.join(get_tests_output_path(), "test_model_config.json")
 output_path = os.path.join(get_tests_output_path(), "train_outputs")
@@ -32,7 +32,7 @@ model_args = DelightfulTtsArgs()
 vocoder_config = VocoderConfig()
 
 
-config = DelightfulTTSConfig(
+config = DelightfulttsConfig(
     audio=audio_config,
     batch_size=2,
     eval_batch_size=8,
@@ -59,7 +59,7 @@ config.save_json(config_path)
 
 # train the model for one epoch
 command_train = (
-    f"CUDA_VISIBLE_DEVICES='{'cpu'}'  python TTS/bin/train_tts.py --config_path {config_path}  "
+    f"CUDA_VISIBLE_DEVICES='{'cpu'}'  python tts/bin/train_tts.py --config_path {config_path}  "
     f"--coqpit.output_path {output_path} "
     "--coqpit.datasets.0.formatter ljspeech "
     "--coqpit.datasets.0.meta_file_train metadata.csv "
@@ -74,7 +74,7 @@ run_cli(command_train)
 # Find latest folder
 continue_path = max(glob.glob(os.path.join(output_path, "*/")), key=os.path.getmtime)
 
-# Inference using TTS API
+# Inference using tts API
 continue_config_path = os.path.join(continue_path, "config.json")
 continue_restore_path, _ = get_last_checkpoint(continue_path)
 out_wav_path = os.path.join(get_tests_output_path(), "output.wav")
@@ -91,7 +91,7 @@ inference_command = f"CUDA_VISIBLE_DEVICES='{get_device_id()}' tts --text 'This 
 run_cli(inference_command)
 
 # restore the model and continue training for one more epoch
-command_train = f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_tts.py --continue_path {continue_path} "
+command_train = f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_tts.py --continue_path {continue_path} "
 run_cli(command_train)
 shutil.rmtree(continue_path)
 shutil.rmtree("tests/data/ljspeech/f0_cache_delightful/")

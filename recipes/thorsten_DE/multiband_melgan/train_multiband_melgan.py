@@ -1,12 +1,12 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.utils.audio import AudioProcessor
-from TTS.utils.downloaders import download_thorsten_de
-from TTS.vocoder.configs import MultibandMelganConfig
-from TTS.vocoder.datasets.preprocess import load_wav_data
-from TTS.vocoder.models.gan import GAN
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.utils.downloaders import download_thorsten_de
+from verbamanent.vocoder.configs import MultibandMelganConfig
+from verbamanent.vocoder.datasets.preprocess import load_wav_data
+from verbamanent.vocoder.models.gan import GAN
 
 output_path = os.path.dirname(os.path.abspath(__file__))
 

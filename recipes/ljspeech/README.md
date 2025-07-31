@@ -1,4 +1,4 @@
-# 🐸💬 TTS LJspeech Recipes
+# 🐸💬 tts LJspeech Recipes
 
 For running the recipes
 

@@ -1,39 +1,39 @@
 # Humble FAQ
-We tried to collect common issues and questions we receive about 🐸TTS. It is worth checking before going deeper.
+We tried to collect common issues and questions we receive about 🐸tts. It is worth checking before going deeper.
 
 ## Errors with a pre-trained model. How can I resolve this?
-- Make sure you use the right commit version of 🐸TTS. Each pre-trained model has its corresponding version that needs to be used. It is defined on the model table.
-- If it is still problematic, post your problem on [Discussions](https://github.com/coqui-ai/TTS/discussions). Please give as many details as possible (error message, your TTS version, your TTS model and config.json etc.)
+- Make sure you use the right commit version of 🐸tts. Each pre-trained model has its corresponding version that needs to be used. It is defined on the model table.
+- If it is still problematic, post your problem on [Discussions](https://github.com/coqui-ai/tts/discussions). Please give as many details as possible (error message, your tts version, your tts model and config.json etc.)
 - If you feel like it's a bug to be fixed, then prefer Github issues with the same level of scrutiny.
 
-## What are the requirements of a good 🐸TTS dataset?
+## What are the requirements of a good 🐸tts dataset?
 * {ref}`See this page <what_makes_a_good_dataset>`
 
 ## How should I choose the right model?
 - First, train Tacotron. It is smaller and faster to experiment with. If it performs poorly, try Tacotron2.
 - Tacotron models produce the most natural voice if your dataset is not too noisy.
-- If both models do not perform well and especially the attention does not align, then try AlignTTS or GlowTTS.
-- If you need faster models, consider SpeedySpeech, GlowTTS or AlignTTS. Keep in mind that SpeedySpeech requires a pre-trained Tacotron or Tacotron2 model to compute text-to-speech alignments.
+- If both models do not perform well and especially the attention does not align, then try Aligntts or Glowtts.
+- If you need faster models, consider SpeedySpeech, Glowtts or Aligntts. Keep in mind that SpeedySpeech requires a pre-trained Tacotron or Tacotron2 model to compute text-to-speech alignments.
 
 ## How can I train my own `tts` model?
-0. Check your dataset with notebooks in [dataset_analysis](https://github.com/coqui-ai/TTS/tree/master/notebooks/dataset_analysis) folder. Use [this notebook](https://github.com/coqui-ai/TTS/blob/master/notebooks/dataset_analysis/CheckSpectrograms.ipynb) to find the right audio processing parameters. A better set of parameters results in a better audio synthesis.
+0. Check your dataset with notebooks in [dataset_analysis](https://github.com/coqui-ai/tts/tree/master/notebooks/dataset_analysis) folder. Use [this notebook](https://github.com/coqui-ai/tts/blob/master/notebooks/dataset_analysis/CheckSpectrograms.ipynb) to find the right audio processing parameters. A better set of parameters results in a better audio synthesis.
 
 1. Write your own dataset `formatter` in `datasets/formatters.py` or format your dataset as one of the supported datasets, like LJSpeech.
     A `formatter` parses the metadata file and converts a list of training samples.
 
 2. If you have a dataset with a different alphabet than English, you need to set your own character list in the ```config.json```.
     - If you use phonemes for training and your language is supported [here](https://github.com/rhasspy/gruut#supported-languages), you don't need to set your character list.
-    - You can use `TTS/bin/find_unique_chars.py` to get characters used in your dataset.
+    - You can use `tts/bin/find_unique_chars.py` to get characters used in your dataset.
 
 3. Write your own text cleaner in ```utils.text.cleaners```. It is not always necessary, except when you have a different alphabet or language-specific requirements.
     - A `cleaner` performs number and abbreviation expansion and text normalization. Basically, it converts the written text to its spoken format.
     - If you go lazy, you can try using ```basic_cleaners```.
 
 4. Fill in a ```config.json```. Go over each parameter one by one and consider it regarding the appended explanation.
-    - Check the `Coqpit` class created for your target model. Coqpit classes for `tts` models are under `TTS/tts/configs/`.
+    - Check the `Coqpit` class created for your target model. Coqpit classes for `tts` models are under `tts/tts/configs/`.
     - You just need to define fields you need/want to change in your `config.json`. For the rest, their default values are used.
     - 'sample_rate', 'phoneme_language' (if phoneme enabled), 'output_path', 'datasets', 'text_cleaner' are the fields you need to edit in most of the cases.
-    - Here is a sample `config.json` for training a `GlowTTS` network.
+    - Here is a sample `config.json` for training a `Glowtts` network.
      ```json
     {
         "model": "glow_tts",
@@ -59,7 +59,7 @@ We tried to collect common issues and questions we receive about 🐸TTS. It is 
 
 6. Train your model.
     - SingleGPU training: ```CUDA_VISIBLE_DEVICES="0" python train_tts.py --config_path config.json```
-    - MultiGPU training: ```python3 -m trainer.distribute --gpus "0,1" --script TTS/bin/train_tts.py --config_path config.json```
+    - MultiGPU training: ```python3 -m trainer.distribute --gpus "0,1" --script tts/bin/train_tts.py --config_path config.json```
 
 **Note:** You can also train your model using pure 🐍 python. Check ```{eval-rst} :ref: 'tutorial_for_nervous_beginners'```.
 
@@ -74,7 +74,7 @@ We tried to collect common issues and questions we receive about 🐸TTS. It is 
 1. Check ground truth spectrograms. If they do not look as they are supposed to, then check audio processing parameters in ```config.json```.
 2. Check train and eval losses and make sure that they all decrease smoothly in time.
 3. Check model spectrograms. Especially, training outputs should look similar to ground truth spectrograms after ~10K iterations.
-4. Your model would not work well at test time until the attention has a near diagonal alignment. This is the sublime art of TTS training.
+4. Your model would not work well at test time until the attention has a near diagonal alignment. This is the sublime art of tts training.
     - Attention should converge diagonally after ~50K iterations.
     - If attention does not converge, the probabilities are;
         - Your dataset is too noisy or small.
@@ -82,7 +82,7 @@ We tried to collect common issues and questions we receive about 🐸TTS. It is 
         - Batch size is too small (batch_size < 32 would be having a hard time converging)
     - You can also try other attention algorithms like 'graves', 'bidirectional_decoder', 'forward_attn'.
         - 'bidirectional_decoder' is your ultimate savior, but it trains 2x slower and demands 1.5x more GPU memory.
-    - You can also try the other models like AlignTTS or GlowTTS.
+    - You can also try the other models like Aligntts or Glowtts.
 
 ## How do I know when to stop training?
 There is no single objective metric to decide the end of a training since the voice quality is a subjective matter.
@@ -105,7 +105,7 @@ The best approach is to pick a set of promising models and run a Mean-Opinion-Sc
 
 ## How can I test a trained model?
 - The best way is to use `tts` or `tts-server` commands. For details check {ref}`here <synthesizing_speech>`.
-- If you need to code your own ```TTS.utils.synthesizer.Synthesizer``` class.
+- If you need to code your own ```tts.utils.synthesizer.Synthesizer``` class.
 
 ## My Tacotron model does not stop - I see "Decoder stopped with 'max_decoder_steps" - Stopnet does not work.
 - In general, all of the above relates to the `stopnet`. It is the part of the model telling the `decoder` when to stop.

@@ -5,10 +5,10 @@ import numpy as np
 from torch.utils.data import DataLoader
 
 from tests import get_tests_output_path, get_tests_path
-from TTS.utils.audio import AudioProcessor
-from TTS.vocoder.configs import WavernnConfig
-from TTS.vocoder.datasets.preprocess import load_wav_feat_data, preprocess_wav_files
-from TTS.vocoder.datasets.wavernn_dataset import WaveRNNDataset
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.vocoder.configs import WavernnConfig
+from verbamanent.vocoder.datasets.preprocess import load_wav_feat_data, preprocess_wav_files
+from verbamanent.vocoder.datasets.wavernn_dataset import WaveRNNDataset
 
 file_path = os.path.dirname(os.path.realpath(__file__))
 OUTPATH = os.path.join(get_tests_output_path(), "loader_tests/")

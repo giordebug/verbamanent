@@ -1,7 +1,7 @@
-TTS code owners / governance system
+tts code owners / governance system
 ==========================================
 
-TTS is run under a governance system inspired (and partially copied from) by the `Mozilla module ownership system <https://www.mozilla.org/about/governance/policies/module-ownership/>`_. The project is roughly divided into modules, and each module has its owners, which are responsible for reviewing pull requests and deciding on technical direction for their modules. Module ownership authority is given to people who have worked extensively on areas of the project.
+tts is run under a governance system inspired (and partially copied from) by the `Mozilla module ownership system <https://www.mozilla.org/about/governance/policies/module-ownership/>`_. The project is roughly divided into modules, and each module has its owners, which are responsible for reviewing pull requests and deciding on technical direction for their modules. Module ownership authority is given to people who have worked extensively on areas of the project.
 
 Module owners also have the authority of naming other module owners or appointing module peers, which are people with authority to review pull requests in that module. They can also sub-divide their module into sub-modules with their owners.
 
@@ -31,13 +31,13 @@ Model exporting
 
 - Eren Gölge (@erogol)
 
-Multi-Speaker TTS
+Multi-Speaker tts
 -----------------
 
 - Eren Gölge (@erogol)
 - Edresson Casanova (@edresson)
 
-TTS
+tts
 ---
 
 - Eren Gölge (@erogol)

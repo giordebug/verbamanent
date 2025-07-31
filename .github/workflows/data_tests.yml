@@ -42,8 +42,8 @@ jobs:
         run: python3 -m pip install --upgrade pip setuptools wheel
       - name: Replace scarf urls
         run: |
-          sed -i 's/https:\/\/coqui.gateway.scarf.sh\//https:\/\/github.com\/coqui-ai\/TTS\/releases\/download\//g' TTS/.models.json
-      - name: Install TTS
+          sed -i 's/https:\/\/coqui.gateway.scarf.sh\//https:\/\/github.com\/coqui-ai\/tts\/releases\/download\//g' tts/.models.json
+      - name: Install tts
         run: |
           python3 -m pip install .[all]
           python3 setup.py egg_info

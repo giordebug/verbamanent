@@ -2,18 +2,18 @@ import os
 
 # Trainer: Where the ✨️ happens.
 # TrainingArgs: Defines the set of arguments of the Trainer.
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-# GlowTTSConfig: all model related values for training, validating and testing.
-from TTS.tts.configs.glow_tts_config import GlowTTSConfig
+# GlowttsConfig: all model related values for training, validating and testing.
+from verbamanent.tts.configs.glow_tts_config import GlowttsConfig
 
 # BaseDatasetConfig: defines name, formatter and path of the dataset.
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.glow_tts import GlowTTS
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
-from TTS.utils.downloaders import download_thorsten_de
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.glow_tts import Glowtts
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
+from verbamanent.utils.downloaders import download_thorsten_de
 
 # we use the same path as this script as our training folder.
 output_path = os.path.dirname(os.path.abspath(__file__))
@@ -31,8 +31,8 @@ if not os.path.exists(dataset_config.path):
     download_thorsten_de(os.path.split(os.path.abspath(dataset_config.path))[0])
 
 # INITIALIZE THE TRAINING CONFIGURATION
-# Configure the model. Every config class inherits the BaseTTSConfig.
-config = GlowTTSConfig(
+# Configure the model. Every config class inherits the BasettsConfig.
+config = GlowttsConfig(
     batch_size=32,
     eval_batch_size=16,
     num_loader_workers=4,
@@ -66,13 +66,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # If characters are not defined in the config, default characters are passed to the config
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,
@@ -84,10 +84,10 @@ train_samples, eval_samples = load_tts_samples(
 # Models take a config object and a speaker manager as input
 # Config defines the details of the model like the number of layers, the size of the embedding, etc.
 # Speaker manager is used by multi-speaker models.
-model = GlowTTS(config, ap, tokenizer, speaker_manager=None)
+model = Glowtts(config, ap, tokenizer, speaker_manager=None)
 
 # INITIALIZE THE TRAINER
-# Trainer provides a generic API to train all the 🐸TTS models with all its perks like mixed-precision training,
+# Trainer provides a generic API to train all the 🐸tts models with all its perks like mixed-precision training,
 # distributed training, etc.
 trainer = Trainer(
     TrainerArgs(), config, output_path, model=model, train_samples=train_samples, eval_samples=eval_samples

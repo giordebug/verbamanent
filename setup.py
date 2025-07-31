@@ -11,7 +11,7 @@
 #        Yb,_,dP `YbadP',dP     Y8,d8b,  ,8,d8,   ,d8b88    88    Y8,d8,   ,d8b,dP   8I   Yb,`YbadP',dP   8I   Yb,d88b, 
 #         "Y8P" 888P"Y888P      `Y8P'"Y88P"P"Y8888P"`Y88    88    `YP"Y8888P"`Y8P'   8I   `Y888P"Y888P'   8I   `Y8P""Y8 
 #
-#                                                    VerbaManent TTS
+#                                                    VerbaManent tts
 
 import os
 import subprocess
@@ -21,16 +21,16 @@ from packaging.version import Version
 import numpy
 import setuptools.command.build_py
 import setuptools.command.develop
-from Cython.Build import cythonize
+#from Cython.Build import cythonize
 from setuptools import Extension, find_packages, setup
 
 python_version = sys.version.split()[0]
-if Version(python_version) < Version("3.9") or Version(python_version) >= Version("3.12"):
-    raise RuntimeError("TTS requires python >= 3.9 and < 3.12 " "but your Python version is {}".format(sys.version))
+if Version(python_version) < Version("3.9"):
+    raise RuntimeError("VerbaManent requires python >= 3.9" "but your Python version is {}".format(sys.version))
 
 
 cwd = os.path.dirname(os.path.abspath(__file__))
-with open(os.path.join(cwd, "TTS", "VERSION")) as fin:
+with open(os.path.join(cwd, "VERSION")) as fin:
     version = fin.read().strip()
 
 
@@ -44,8 +44,7 @@ class develop(setuptools.command.develop.develop):
         setuptools.command.develop.develop.run(self)
 
 
-# The documentation for this feature is in server/README.md
-package_data = ["TTS/server/templates/*"]
+package_data = ["verbamanent/server/templates/*"]
 
 
 def pip_install(package_name):
@@ -66,28 +65,28 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 exts = [
     Extension(
-        name="TTS.tts.utils.monotonic_align.core",
-        sources=["TTS/tts/utils/monotonic_align/core.pyx"],
+        name="tts.tts.utils.monotonic_align.core",
+        sources=["tts/tts/utils/monotonic_align/core.pyx"],
     )
 ]
 setup(
-    name="TTS",
+    name="verbamanent",
     version=version,
-    url="https://github.com/giordebug/verbamanent",
+    url="https://github.com/michele-giordano/verbamanent",
     author="Michele Giordano",
-    description="VerbaManent: Deep learning for Text to Speech.",
+    description="VerbaManent - Advanced Text-to-Speech",
     long_description=README,
     long_description_content_type="text/markdown",
     license="MPL-2.0",
     # cython
-    include_dirs=numpy.get_include(),
-    ext_modules=cythonize(exts, language_level=3),
+    #include_dirs=numpy.get_include(),
+    #ext_modules=cythonize(exts, language_level=3),
     # ext_modules=find_cython_extensions(),
     # package
     include_package_data=True,
-    packages=find_packages(include=["TTS"], exclude=["*.tests", "*tests.*", "tests.*", "*tests", "tests"]),
+    packages=find_packages(where=".", include=["verbamanent","verbamanent.*"], exclude=["*.tests", "*tests.*", "tests.*", "*tests", "tests"]),
     package_data={
-        "TTS": [
+        "verbamanent": [
             "VERSION",
         ]
     },
@@ -107,8 +106,8 @@ setup(
         "notebooks": requirements_notebooks,
         "ja": requirements_ja,
     },
-    python_requires=">=3.9.0, <3.12",
-    entry_points={"console_scripts": ["tts=TTS.bin.synthesize:main", "tts-server = TTS.server.server:main"]},
+    python_requires=">=3.9.0",
+    entry_points={"console_scripts": ["verbamanent=verbamanent.bin.synthesize:main", "verbamanent-server = verbamanent.server.server:main"]},
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -129,3 +128,7 @@ setup(
     ],
     zip_safe=False,
 )
+
+if __name__ == "__main__":
+    pkgs = find_packages(where=".")
+    print("Pacchetti trovati da setuptools:", pkgs)

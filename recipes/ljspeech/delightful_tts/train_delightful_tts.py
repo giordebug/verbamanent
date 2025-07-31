@@ -1,13 +1,13 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.delightful_tts_config import DelightfulTtsAudioConfig, DelightfulTTSConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.delightful_tts import DelightfulTTS, DelightfulTtsArgs, VocoderConfig
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio.processor import AudioProcessor
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.delightful_tts_config import DelightfulTtsAudioConfig, DelightfulttsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.delightful_tts import Delightfultts, DelightfulTtsArgs, VocoderConfig
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio.processor import AudioProcessor
 
 data_path = ""
 output_path = os.path.dirname(os.path.abspath(__file__))
@@ -21,7 +21,7 @@ model_args = DelightfulTtsArgs()
 
 vocoder_config = VocoderConfig()
 
-delightful_tts_config = DelightfulTTSConfig(
+delightful_tts_config = DelightfulttsConfig(
     run_name="delightful_tts_ljspeech",
     run_description="Train like in delightful tts paper.",
     model_args=model_args,
@@ -58,7 +58,7 @@ delightful_tts_config = DelightfulTTSConfig(
     max_text_len=130,
 )
 
-tokenizer, config = TTSTokenizer.init_from_config(delightful_tts_config)
+tokenizer, config = ttsTokenizer.init_from_config(delightful_tts_config)
 
 ap = AudioProcessor.init_from_config(config)
 
@@ -70,7 +70,7 @@ train_samples, eval_samples = load_tts_samples(
     eval_split_size=config.eval_split_size,
 )
 
-model = DelightfulTTS(ap=ap, config=config, tokenizer=tokenizer, speaker_manager=None)
+model = Delightfultts(ap=ap, config=config, tokenizer=tokenizer, speaker_manager=None)
 
 trainer = Trainer(
     TrainerArgs(),

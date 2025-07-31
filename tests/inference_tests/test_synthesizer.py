@@ -1,12 +1,12 @@
 import os
 import unittest
 
-from trainer.io import save_checkpoint
+#from trainer.io import save_checkpoint
 
 from tests import get_tests_input_path
-from TTS.config import load_config
-from TTS.tts.models import setup_model
-from TTS.utils.synthesizer import Synthesizer
+from verbamanent.config import load_config
+from verbamanent.tts.models import setup_model
+from verbamanent.utils.synthesizer import Synthesizer
 
 
 class SynthesizerTest(unittest.TestCase):

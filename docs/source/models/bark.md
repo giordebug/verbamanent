@@ -1,6 +1,6 @@
 # 🐶 Bark
 
-Bark is a multi-lingual TTS model created by [Suno-AI](https://www.suno.ai/). It can generate conversational speech as well as  music and sound effects.
+Bark is a multi-lingual tts model created by [Suno-AI](https://www.suno.ai/). It can generate conversational speech as well as  music and sound effects.
 It is architecturally very similar to Google's [AudioLM](https://arxiv.org/abs/2209.03143). For more information, please refer to the [Suno-AI's repo](https://github.com/suno-ai/bark).
 
 
@@ -15,8 +15,8 @@ It is architecturally very similar to Google's [AudioLM](https://arxiv.org/abs/2
 ```python
 text = "Hello, my name is Manmay , how are you?"
 
-from TTS.tts.configs.bark_config import BarkConfig
-from TTS.tts.models.bark import Bark
+from verbamanent.tts.configs.bark_config import BarkConfig
+from verbamanent.tts.models.bark import Bark
 
 config = BarkConfig()
 model = Bark.init_from_config(config)
@@ -30,14 +30,14 @@ output_dict = model.synthesize(text, config, speaker_id="random", voice_dirs=Non
 output_dict = model.synthesize(text, config, speaker_id="ljspeech", voice_dirs="bark_voices/")
 ```
 
-Using 🐸TTS API:
+Using 🐸tts API:
 
 ```python
-from TTS.api import TTS
+from verbamanent.api import tts
 
 # Load the model to GPU
 # Bark is really slow on CPU, so we recommend using GPU.
-tts = TTS("tts_models/multilingual/multi-dataset/bark", gpu=True)
+tts = tts("tts_models/multilingual/multi-dataset/bark", gpu=True)
 
 
 # Cloning a new speaker
@@ -57,11 +57,11 @@ tts.tts_to_file(text="Hello, my name is Manmay , how are you?",
 
 
 # random speaker
-tts = TTS("tts_models/multilingual/multi-dataset/bark", gpu=True)
+tts = tts("tts_models/multilingual/multi-dataset/bark", gpu=True)
 tts.tts_to_file("hello world", file_path="out.wav")
 ```
 
-Using 🐸TTS Command line:
+Using 🐸tts Command line:
 
 ```console
 # cloning the `ljspeech` voice
@@ -87,12 +87,12 @@ tts --model_name  tts_models/multilingual/multi-dataset/bark \
 
 ## BarkConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.bark_config.BarkConfig
+.. autoclass:: tts.tts.configs.bark_config.BarkConfig
     :members:
 ```
 
 ## Bark Model
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.bark.Bark
+.. autoclass:: tts.tts.models.bark.Bark
     :members:
 ```

@@ -6,13 +6,13 @@ from copy import deepcopy
 import torch
 
 from tests import get_tests_output_path
-from TTS.tts.configs.overflow_config import OverflowConfig
-from TTS.tts.layers.overflow.common_layers import Encoder, Outputnet, OverflowUtils
-from TTS.tts.layers.overflow.decoder import Decoder
-from TTS.tts.layers.overflow.neural_hmm import EmissionModel, NeuralHMM, TransitionModel
-from TTS.tts.models.overflow import Overflow
-from TTS.tts.utils.helpers import sequence_mask
-from TTS.utils.audio import AudioProcessor
+from verbamanent.tts.configs.overflow_config import OverflowConfig
+from verbamanent.tts.layers.overflow.common_layers import Encoder, Outputnet, OverflowUtils
+from verbamanent.tts.layers.overflow.decoder import Decoder
+from verbamanent.tts.layers.overflow.neural_hmm import EmissionModel, NeuralHMM, TransitionModel
+from verbamanent.tts.models.overflow import Overflow
+from verbamanent.tts.utils.helpers import sequence_mask
+from verbamanent.utils.audio import AudioProcessor
 
 # pylint: disable=unused-variable
 

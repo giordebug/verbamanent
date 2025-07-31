@@ -3,13 +3,13 @@ import unittest
 
 import numpy as np
 import torch
-from trainer.io import save_checkpoint
+#from trainer.io import save_checkpoint
 
 from tests import get_tests_input_path
-from TTS.config import load_config
-from TTS.encoder.utils.generic_utils import setup_encoder_model
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.utils.audio import AudioProcessor
+from verbamanent.config import load_config
+from verbamanent.encoder.utils.generic_utils import setup_encoder_model
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.utils.audio import AudioProcessor
 
 encoder_config_path = os.path.join(get_tests_input_path(), "test_speaker_encoder_config.json")
 encoder_model_path = os.path.join(get_tests_input_path(), "checkpoint_0.pth")

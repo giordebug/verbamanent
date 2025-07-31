@@ -1,8 +1,8 @@
 import torch
 
-from TTS.vocoder.configs import WavegradConfig
-from TTS.vocoder.layers.wavegrad import DBlock, FiLM, PositionalEncoding, UBlock
-from TTS.vocoder.models.wavegrad import Wavegrad, WavegradArgs
+from verbamanent.vocoder.configs import WavegradConfig
+from verbamanent.vocoder.layers.wavegrad import DBlock, FiLM, PositionalEncoding, UBlock
+from verbamanent.vocoder.models.wavegrad import Wavegrad, WavegradArgs
 
 
 def test_positional_encoding():

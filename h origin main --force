@@ -2,7 +2,7 @@
 [33m539bafe0[m first README.md
 [33mf6b2d79c[m first README.md
 [33mdbf1a08a[m Update generic_utils.py (#3561)
-[33m5dcc16d1[m Bug fix in MP3 and FLAC compute length on TTSDataset (#3092)
+[33m5dcc16d1[m Bug fix in MP3 and FLAC compute length on ttsDataset (#3092)
 [33m55c70637[m Merge pull request #3423 from idiap/fix-aux-tests
 [33m99fee6f5[m build: use Trainer>=0.0.36
 [33m186cafb3[m Merge pull request #3412 from coqui-ai/reuben/docs-studio-refs
@@ -26,7 +26,7 @@
 [33mb40750d1[m Remove models that require app.coqui.ai
 [33mecc38891[m Fix CI readme
 [33m5ab228df[m Fix CI
-[33m8c20a599[m Remove coqui studio integration from TTS
+[33m8c20a599[m Remove coqui studio integration from verbamanent
 [33m5cd750ac[m Fix API and CI
 [33me3c9dab7[m Make CLI work
 [33m0a90359a[m rename speaker file
@@ -51,7 +51,7 @@
 [33me49c512d[m Merge pull request #3351 from aaron-lii/chinese-puncs
 [33m9c7b8509[m Merge pull request #3352 from VladCuciureanu/patch-1
 [33m2d020159[m Update to v0.21.3
-[33m5f900f15[m Add XTTS Fine tuning gradio demo (#3296)
+[33m5f900f15[m Add Xtts Fine tuning gradio demo (#3296)
 [33mf5b41674[m fix: Few typos in Tortoise docs.
 [33m7b880818[m fix pause problem of Chinese speech
 [33mbcd500fa[m Fixing bug
@@ -62,16 +62,16 @@
 [33m93283385[m Merge pull request #3318 from coqui-ai/calling_hf_models
 [33m77c21556[m Merge pull request #1 from coqui-ai/dev
 [33mbfbaffc8[m Fixup
-[33m18b7d746[m Updating XTTS docs
+[33m18b7d746[m Updating Xtts docs
 [33mb75e90ba[m Make text splitting optional
 [33m3b8894a3[m Make style
 [33m2fd8cf3d[m Make xtts runnable by version names
 [33m11ec9f74[m Add hi in config defaults
 [33m00a870c2[m Update to v0.21.1
-[33m7e575068[m Merge branch 'dev' of https://github.com/coqui-ai/TTS into dev
+[33m7e575068[m Merge branch 'dev' of https://github.com/coqui-ai/tts into dev
 [33m32065139[m Simple text cleaner for "hi"
 [33m1542a50c[m Update to v0.21.0
-[33m6dd43b0c[m Update to XTTS v2.0.3
+[33m6dd43b0c[m Update to Xtts v2.0.3
 [33ma55755c8[m update deepspeed version (#3281)
 [33m1bf59261[m Introducing Development Dockerfile (#3263)
 [33m4d0f53d2[m Misjudgment of `is_multi_lingual` When Loading Multilingual Model via `model_path` (#3273)
@@ -83,12 +83,12 @@
 [33m29dede20[m Merge pull request #3249 from coqui-ai/run_ci_for_v0.20.6
 [33mc011ab74[m Update to v0.20.6
 [33m52cb1e2f[m Update model hash for v2.0.2
-[33m6075fa20[m Ensures that only GPT model is in training mode during XTTS GPT training (#3241)
+[33m6075fa20[m Ensures that only GPT model is in training mode during Xtts GPT training (#3241)
 [33ma3279f92[m Make style
 [33mf21067a8[m Make k_diffusion optional
 [33m44494daa[m Update CI version
 [33mc864acf2[m Update versions
-[33m11283fce[m Ensures that only GPT model is in training mode during XTTS GPT training (#3241)
+[33m11283fce[m Ensures that only GPT model is in training mode during Xtts GPT training (#3241)
 [33m14579a46[m Merge pull request #3248 from coqui-ai/slacker_deps
 [33m44880f09[m Make style
 [33m26efdf6e[m Make k_diffusion optional
@@ -102,9 +102,9 @@
 [33m7e4375da[m Update to v0.20.6
 [33mfbc18b8c[m Fix zh bug (#3238)
 [33m675f9835[m Add sentence splitting (#3227)
-[33m3c2d5a9e[m Remove duplicate AudioProcessor code and fix ExtractTTSpectrogram.ipynb (#3230)
+[33m3c2d5a9e[m Remove duplicate AudioProcessor code and fix Extractttspectrogram.ipynb (#3230)
 [33m88630c60[m Update to v0.20.5
-[33m73a5bd08[m Fix XTTS GPT padding and inference issues (#3216)
+[33m73a5bd08[m Fix Xtts GPT padding and inference issues (#3216)
 [33m15f0ac57[m Update README.md (#3215)
 [33m04901fb2[m Add speed control for inference (#3214)
 [33md96f3885[m Update to v0.20.4
@@ -121,7 +121,7 @@
 [33m66a1e248[m torchaudio should use proper backend to load audio (#3179)
 [33m46d9c272[m Update to v0.20.2
 [33m58cb0d8d[m Remove v1 doc and tests (#3172)
-[33m03ad9013[m Add lang code in XTTS doc (#3158)
+[33m03ad9013[m Add lang code in Xtts doc (#3158)
 [33m78a59661[m Fix for exception on streaming if last chunk empty (#3160)
 [33m99edd6da[m Fix ModelManager.list_models() (#3128)
 [33m77b18126[m Merge pull request #3126 from akx/freevc-config-module
@@ -129,30 +129,30 @@
 [33ma24ebcd8[m Fix coqui api (#3168)
 [33mce1a39a9[m Add char limit warn (#3130)
 [33mf846a9f3[m Update to v0.20.1
-[33mcbdbc44e[m Fix XTTS v2.0 training recipe (#3154)
+[33mcbdbc44e[m Fix Xtts v2.0 training recipe (#3154)
 [33m5e992d87[m Merge pull request #3149 from coqui-ai/fixup_xtts_v2
 [33m5f9ab6cf[m Fix style
-[33m905900af[m Update XTTS v1.1 recipe
-[33m2470599d[m Drop XTTS v1
-[33m13243df5[m Update XTTS v1.1 files
-[33mcabff9f3[m Update XTTS v2.0 recipe
+[33m905900af[m Update Xtts v1.1 recipe
+[33m2470599d[m Drop Xtts v1
+[33m13243df5[m Update Xtts v1.1 files
+[33mcabff9f3[m Update Xtts v2.0 recipe
 [33m09fb317e[m Remove unused code
-[33mb146de4c[m Bug fix on XTTS v2.0 Trainer
+[33mb146de4c[m Bug fix on Xtts v2.0 Trainer
 [33mf444f296[m Add multiples references on xtts inference tests
 [33m1b6f8d0e[m Update unit tests and recipes
 [33m72b2bac0[m Load reference in 24khz to avoid issued with multiple sr references
-[33m00294ffd[m Update XTTS docs
-[33m459ad70d[m Add support for multiples speaker references on XTTS inference
-[33m9942000c[m Update XTTS v2 recipe model files
-[33mf0cb19ec[m Drop diffusion from XTTS (#3150)
+[33m00294ffd[m Update Xtts docs
+[33m459ad70d[m Add support for multiples speaker references on Xtts inference
+[33m9942000c[m Update Xtts v2 recipe model files
+[33mf0cb19ec[m Drop diffusion from Xtts (#3150)
 [33m5d418bb8[m Update docs
 [33m9bbf6eb8[m Drop use_ne_hifigan
-[33m9d54bd76[m Fixup XTTS
+[33m9d54bd76[m Fixup Xtts
 [33mc713a839[m Update VERSION
 [33m7eedfc67[m Update README.md
-[33me45227d9[m XTTS v2.0 (#3137)
+[33me45227d9[m Xtts v2.0 (#3137)
 [33m38f6f8f0[m Run `make style` & re-enable it in CI (#3127)
-[33m5ae369d6[m Move FreeVCConfig to TTS.vc.configs (like all other config classes)
+[33m5ae369d6[m Move FreeVCConfig to tts.vc.configs (like all other config classes)
 [33m6fef4f90[m Bump up to v0.19.1
 [33meccc94be[m Merge pull request #2983 from vltmedia/dev
 [33m2d6bd716[m Merge pull request #3109 from coqui-ai/tts_3067
@@ -164,39 +164,39 @@
 [33m6fa46d19[m Fix get_conditioning_latents when using only ne
 [33medd3a287[m Bump up to v0.19.0
 [33m16ba377f[m Merge pull request #3086 from coqui-ai/xtts_trainer
-[33m01839af9[m Bug fix on XTTS masking training
-[33m8af3d2db[m Add a dedicated workflow for XTTS tests
+[33m01839af9[m Bug fix on Xtts masking training
+[33m8af3d2db[m Add a dedicated workflow for Xtts tests
 [33m818aa0eb[m Merge branch 'coqui-ai:dev' into dev
-[33mde1d521c[m Update XTTS docs
-[33m0f96abb5[m Add FT inference example on XTTS docs
-[33m67ca70af[m Fix Delightful TTS layers unit test
-[33m37b79454[m Update XTTS train not implemented error to point to the XTTS docs
-[33m1ee80967[m Update XTTS docs
-[33m6fefc36e[m Update XTTS docs
-[33m8853e1c3[m Update XTTS recipe to only download checkpoint if it is needed
+[33mde1d521c[m Update Xtts docs
+[33m0f96abb5[m Add FT inference example on Xtts docs
+[33m67ca70af[m Fix Delightful tts layers unit test
+[33m37b79454[m Update Xtts train not implemented error to point to the Xtts docs
+[33m1ee80967[m Update Xtts docs
+[33m6fefc36e[m Update Xtts docs
+[33m8853e1c3[m Update Xtts recipe to only download checkpoint if it is needed
 [33m653f2e75[m Update xtts trainer recipe
-[33me8a1a502[m Remove unused vars in Delightful TTS layers tests
+[33me8a1a502[m Remove unused vars in Delightful tts layers tests
 [33mec7f5476[m Rebase bug fix and update recipe
-[33maffaf111[m Add XTTS training unit test
+[33maffaf111[m Add Xtts training unit test
 [33m1f92741d[m Fix issue #2971
-[33m94dcf849[m Rename XTTS recipe
-[33m5f98dbee[m Update Ljspeech XTTS recipe
-[33m469d6246[m Update LJspeech XTTS recipe
-[33m9e3598c3[m Bug Fix on inference using XTTS trainer checkpoint
+[33m94dcf849[m Rename Xtts recipe
+[33m5f98dbee[m Update Ljspeech Xtts recipe
+[33m469d6246[m Update LJspeech Xtts recipe
+[33m9e3598c3[m Bug Fix on inference using Xtts trainer checkpoint
 [33mc4ceaabe[m Add test sentences during the training
 [33m2f868dd5[m Bug fix on reproducible evaluation
 [33mbafab049[m Add prompting masking
 [33m47d613df[m Add reproducible evaluation
 [33m40a4e631[m Update mel spectrogram for the style encoder
-[33ma32961bc[m Add XTTS base training code
+[33ma32961bc[m Add Xtts base training code
 [33m1e152692[m Bump up to v0.18.2
 [33m420a90ed[m Merge pull request #3096 from coqui-ai/fix-xtts-v1.1
 [33mdad6a7b0[m Preserve [ja] token of the text processing
 [33mc7a16042[m Remove global cutlet import
 [33m414f0de0[m Bump up to v0.18.1
-[33m59576fc0[m Bug fix on XTTS v1.1 inference (#3093)
+[33m59576fc0[m Bug fix on Xtts v1.1 inference (#3093)
 [33m85e73237[m Bump up to v0.18.0
-[33mcf971161[m XTTS v1.1 (#3089)
+[33mcf971161[m Xtts v1.1 (#3089)
 [33m747f688d[m Bump up to v0.17.10
 [33m93e6961b[m Update .models.json
 [33mbf68848f[m Bump up to v0.17.9
@@ -219,11 +219,11 @@
 [33m99650044[m Try-except to present error when the user dont have connection
 [33m529ea3f6[m Print a message when it is already donwloaded
 [33mee1ef1c5[m Remove unused method
-[33m4a6103fe[m Redownload XTTS with the local and remote config do not match
+[33m4a6103fe[m Redownload Xtts with the local and remote config do not match
 [33m0520697b[m v0.17.7
-[33me5e0cbff[m Streaming inference for XTTS 🚀 (#3035)
-[33m21501362[m None is not able to be read for "XTTS", fixes crash if its set to None. (#3009)
-[33mf133b9d2[m Upgrade and Optimize TTS Code in extractttsspectrogram.ipynb (#3012)
+[33me5e0cbff[m Streaming inference for Xtts 🚀 (#3035)
+[33m21501362[m None is not able to be read for "Xtts", fixes crash if its set to None. (#3009)
+[33mf133b9d2[m Upgrade and Optimize tts Code in extractttsspectrogram.ipynb (#3012)
 [33m155c5fc0[m v0.17.6
 [33m4c3c11c9[m Tortoise inference fix and fix zoo unit tests (#3010)
 [33mbb05dcb9[m Merge pull request #2922 from coqui-ai/be_tts
@@ -239,10 +239,10 @@
 [33m6277f09c[m requirements.txt: loosen pandas pin (1.4 would need to be compiled from source on macs)
 [33m8bb2d652[m pyproject.toml: loosen dependencies to avoid building from source
 [33m94c5fd07[m Remove unnecessary black exclude config
-[33m0a82f063[m Late-import main TTS libraries in `tts` CLI
+[33m0a82f063[m Late-import main tts libraries in `tts` CLI
 [33m5c047cf3[m Ensure `tts` CLI tool readme and usage help is in sync
 [33m0b95b88f[m Bum up to v0.17.5
-[33m359755cc[m Merge pull request #2990 from coqui-ai/fix-TTS-install
+[33m359755cc[m Merge pull request #2990 from coqui-ai/fix-tts-install
 [33m089ad66d[m Lower the versions constraints
 [33mbbfdfbff[m Update transformers to latest
 [33mf1c1d14c[m Add back umap
@@ -261,8 +261,8 @@
 [33maf62613c[m Bump up to v0.17.1
 [33mee7cee0e[m Fixup
 [33m5dcf9ae3[m Bump up v0.17.0
-[33m4033db5f[m 🔥 XTTS implementation
-[33m4d3f23b5[m Add CML-TTS dataset YourTTS training recipe (#2934)
+[33m4033db5f[m 🔥 Xtts implementation
+[33m4d3f23b5[m Add CML-tts dataset Yourtts training recipe (#2934)
 [33m9533f865[m Make style
 [33m562a9509[m Add BE model
 [33mb4c82685[m Add model entries
@@ -278,11 +278,11 @@
 [33ma7a96d08[m Fix loading Bark (#2893)
 [33m04a36a72[m Bump up to v0.16.4
 [33ma96562a7[m Update .models.json
-[33m409db505[m Add device support in TTS and Synthesizer (#2855)
+[33m409db505[m Add device support in tts and Synthesizer (#2855)
 [33mfebcaf71[m Add customizable data home path (#2871)
 [33mc4e5effa[m Bump up to v0.16.3
 [33m1f9d600b[m Denote human voices in README.md (#2851)
-[33m3a104d5c[m Update Studio API for XTTS (#2861)
+[33m3a104d5c[m Update Studio API for Xtts (#2861)
 [33m37b558cc[m Make style
 [33m9a8352b8[m Fix import error with Bark
 [33mc87377b7[m Bump up to v0.16.2
@@ -292,15 +292,15 @@
 [33m52a528cf[m add post functionality to /api/tts (#2836)
 [33mdc04baa1[m Bump up to v0.16.1
 [33m17ddd657[m Please p3.11
-[33m69f080eb[m Fix DelightfulTTS  (#2823)
+[33m69f080eb[m Fix Delightfultts  (#2823)
 [33m483888b9[m Add kwargs to ignore extra arguments w/o error (#2822)
-[33m9e74b51a[m Delightful TTS VCTK recipe fixes (#2808)
-[33md124f784[m Recipe for Belarusian TTS (#2756)
+[33m9e74b51a[m Delightful tts VCTK recipe fixes (#2808)
+[33md124f784[m Recipe for Belarusian tts (#2756)
 [33mc140df5a[m Adds multi-language support for VITS onnx, fixes onnx inference error when speaker_id is None or not passed, fixes onnx exporting for models with init_discriminator=false (#2816)
 [33mb7393265[m Bump up to v0.16.0
 [33m8aacb818[m Fix Tortoise load (#2791)
 [33mb3472a73[m Update README.md
-[33m6fdb88f8[m Add Delightful-TTS implementation (#2095)
+[33m6fdb88f8[m Add Delightful-tts implementation (#2095)
 [33mf24c5e02[m Update README
 [33m1652598a[m Test synthesize api separately
 [33m0de12ec5[m API tests (#2790)
@@ -375,7 +375,7 @@
 [33m547a72c9[m Fixup
 [33ma494f0c9[m Bump up to v0.14.1
 [33m50b10747[m Make `tts` ready
-[33me785d101[m Port Fairseq TTS models  (#2628)
+[33me785d101[m Port Fairseq tts models  (#2628)
 [33m0d5e68a0[m fix typo (#2647)
 [33mdeebc0cc[m Add bark requirements
 [33m23a7a9a3[m Fetch all built-in speakers (#2626)
@@ -386,7 +386,7 @@
 [33m01aa0034[m Fixup docs
 [33m4de797bb[m Draft ONNX export for VITS (#2563)
 [33m16c9df0d[m Fix API CI (#2616)
-[33ma3d5801c[m Tortoise TTS inference (#2547)
+[33ma3d5801c[m Tortoise tts inference (#2547)
 [33m0b6b957e[m Drop API tests when token is not available.
 [33m9b5822d6[m Update VAD for silence trimming.  (#2604)
 [33m5c89c621[m Warn when lang is not avail (#2460)
@@ -446,7 +446,7 @@
 [33m4ca07514[m Remove doc bot (#2399)
 [33m0d12229b[m Update vits.py
 [33m62451301[m add energy by default to Fastspeech2 config (#2326)
-[33m478c8178[m Basic Mary-TTS API compatibility (#2352)
+[33m478c8178[m Basic Mary-tts API compatibility (#2352)
 [33md39bc74f[m OverFlow with test sentences (#2253)
 [33m16b98622[m Fix Speaker Consistency Loss (SCL) (#2364)
 [33ma365a7e8[m numpy version for py310 (#2316)
@@ -472,7 +472,7 @@
 [33mcf076345[m Make style
 [33m13334d50[m Load model from path
 [33mc59b3f75[m Add Catalan text cleaners for Catalan support (#2295)
-[33md83ee8fe[m Adding neural HMM TTS Model (#2272)
+[33md83ee8fe[m Adding neural HMM tts Model (#2272)
 [33m497f22b2[m Cache speaker encoder model (#2284)
 [33m6e3f74fc[m Fix #2191
 [33mbc422f2f[m Fastspeech2 (#2073)
@@ -491,8 +491,8 @@
 [33m46b0ad37[m Bump up to v0.10.0
 [33ma9167cf2[m Fixup overflow (#2218)
 [33mecea43ec[m Adding pre-trained Overflow model (#2211)
-[33m061ac431[m Add Original YourTTS vocabulary for full transfer learning (#2206)
-[33m3b1a28fa[m Add YourTTS VCTK recipe (#2198)
+[33m061ac431[m Add Original Yourtts vocabulary for full transfer learning (#2206)
+[33m3b1a28fa[m Add Yourtts VCTK recipe (#2198)
 [33m3b8b105b[m Adding OverFlow (#2183)
 [33m2e153d54[m Adding missing key to formatter (#2194)
 [33m0c9fa222[m Update README (#2204)

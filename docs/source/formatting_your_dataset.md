@@ -1,7 +1,7 @@
 (formatting_your_dataset)=
 # Formatting Your Dataset
 
-For training a TTS model, you need a dataset with speech recordings and transcriptions. The speech must be divided into audio clips and each clip needs transcription.
+For training a tts model, you need a dataset with speech recordings and transcriptions. The speech must be divided into audio clips and each clip needs transcription.
 
 If you have a single audio file and you need to split it into clips, there are different open-source tools for you. We recommend Audacity. It is an open-source and free audio editing software.
 
@@ -34,7 +34,7 @@ audio3|It'll be $16 sir.|It'll be sixteen dollars sir.
 
 In the end, we have the following folder structure
 ```
-/MyTTSDataset
+/MyttsDataset
       |
       | -> metadata.txt
       | -> /wavs
@@ -43,19 +43,19 @@ In the end, we have the following folder structure
               | ...
 ```
 
-The format above is taken from widely-used the [LJSpeech](https://keithito.com/LJ-Speech-Dataset/) dataset. You can also download and see the dataset. 🐸TTS already provides tooling for the LJSpeech. if you use the same format, you can start training your models right away.
+The format above is taken from widely-used the [LJSpeech](https://keithito.com/LJ-Speech-Dataset/) dataset. You can also download and see the dataset. 🐸tts already provides tooling for the LJSpeech. if you use the same format, you can start training your models right away.
 
 ## Dataset Quality
 
 Your dataset should have good coverage of the target language. It should cover the phonemic variety, exceptional sounds and syllables. This is extremely important for especially non-phonemic languages like English.
 
-For more info about dataset qualities and properties check our [post](https://github.com/giordebug/verbamanent/wiki/What-makes-a-good-TTS-dataset).
+For more info about dataset qualities and properties check our [post](https://github.com/giordebug/verbamanent/wiki/What-makes-a-good-tts-dataset).
 
-## Using Your Dataset in 🐸TTS
+## Using Your Dataset in 🐸tts
 
 After you collect and format your dataset, you need to check two things. Whether you need a `formatter` and a `text_cleaner`. The `formatter` loads the text file (created above) as a list and the `text_cleaner` performs a sequence of text normalization operations that converts the raw text into the spoken representation (e.g. converting numbers to text, acronyms, and symbols to the spoken format).
 
-If you use a different dataset format than the LJSpeech or the other public datasets that 🐸TTS supports, then you need to write your own `formatter`.
+If you use a different dataset format than the LJSpeech or the other public datasets that 🐸tts supports, then you need to write your own `formatter`.
 
 If your dataset is in a new language or it needs special normalization steps, then you need a new `text_cleaner`.
 
@@ -80,11 +80,11 @@ phonemes if needed.
 
 ## Loading your dataset
 
-Load one of the dataset supported by 🐸TTS.
+Load one of the dataset supported by 🐸tts.
 
 ```python
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
 
 
 # dataset config for one of the pre-defined datasets
@@ -99,7 +99,7 @@ train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True)
 Load a custom dataset with a custom formatter.
 
 ```python
-from TTS.tts.datasets import load_tts_samples
+from verbamanent.tts.datasets import load_tts_samples
 
 
 # custom formatter implementation
@@ -121,9 +121,9 @@ def formatter(root_path, manifest_file, **kwargs):  # pylint: disable=unused-arg
 train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True, formatter=formatter)
 ```
 
-See `TTS.tts.datasets.TTSDataset`, a generic `Dataset` implementation for the `tts` models.
+See `tts.tts.datasets.ttsDataset`, a generic `Dataset` implementation for the `tts` models.
 
-See `TTS.vocoder.datasets.*`, for different `Dataset` implementations for the `vocoder` models.
+See `tts.vocoder.datasets.*`, for different `Dataset` implementations for the `vocoder` models.
 
-See `TTS.utils.audio.AudioProcessor` that includes all the audio processing and feature extraction functions used in a
+See `tts.utils.audio.AudioProcessor` that includes all the audio processing and feature extraction functions used in a
 `Dataset` implementation. Feel free to add things as you need.

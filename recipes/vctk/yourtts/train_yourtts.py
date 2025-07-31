@@ -1,35 +1,35 @@
 import os
 
 import torch
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.bin.compute_embeddings import compute_embeddings
-from TTS.bin.resample import resample_files
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.vits_config import VitsConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.vits import CharactersConfig, Vits, VitsArgs, VitsAudioConfig
-from TTS.utils.downloaders import download_vctk
+from verbamanent.bin.compute_embeddings import compute_embeddings
+from verbamanent.bin.resample import resample_files
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.vits_config import VitsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.vits import CharactersConfig, Vits, VitsArgs, VitsAudioConfig
+from verbamanent.utils.downloaders import download_vctk
 
 torch.set_num_threads(24)
 
 # pylint: disable=W0105
 """
-    This recipe replicates the first experiment proposed in the YourTTS paper (https://arxiv.org/abs/2112.02418).
-    YourTTS model is based on the VITS model however it uses external speaker embeddings extracted from a pre-trained speaker encoder and has small architecture changes.
-    In addition, YourTTS can be trained in multilingual data, however, this recipe replicates the single language training using the VCTK dataset.
+    This recipe replicates the first experiment proposed in the Yourtts paper (https://arxiv.org/abs/2112.02418).
+    Yourtts model is based on the VITS model however it uses external speaker embeddings extracted from a pre-trained speaker encoder and has small architecture changes.
+    In addition, Yourtts can be trained in multilingual data, however, this recipe replicates the single language training using the VCTK dataset.
     If you are interested in multilingual training, we have commented on parameters on the VitsArgs class instance that should be enabled for multilingual training.
     In addition, you will need to add the extra datasets following the VCTK as an example.
 """
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Name of the run for the Trainer
-RUN_NAME = "YourTTS-EN-VCTK"
+RUN_NAME = "Yourtts-EN-VCTK"
 
 # Path where you want to save the models outputs (configs, checkpoints and tensorboard logs)
-OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
+OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-Yourtts/"
 
-# If you want to do transfer learning and speedup your training you can set here the path to the original YourTTS model
+# If you want to do transfer learning and speedup your training you can set here the path to the original Yourtts model
 RESTORE_PATH = None  # "/root/.local/share/tts/tts_models--multilingual--multi-dataset--your_tts/model_file.pth"
 
 # This paramter is useful to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
@@ -123,7 +123,7 @@ audio_config = VitsAudioConfig(
     num_mels=80,
 )
 
-# Init VITSArgs setting the arguments that are needed for the YourTTS model
+# Init VITSArgs setting the arguments that are needed for the Yourtts model
 model_args = VitsArgs(
     d_vector_file=D_VECTOR_FILES,
     use_d_vector_file=True,
@@ -131,7 +131,7 @@ model_args = VitsArgs(
     num_layers_text_encoder=10,
     speaker_encoder_model_path=SPEAKER_ENCODER_CHECKPOINT_PATH,
     speaker_encoder_config_path=SPEAKER_ENCODER_CONFIG_PATH,
-    resblock_type_decoder="2",  # In the paper, we accidentally trained the YourTTS using ResNet blocks type 2, if you like you can use the ResNet blocks type 1 like the VITS model
+    resblock_type_decoder="2",  # In the paper, we accidentally trained the Yourtts using ResNet blocks type 2, if you like you can use the ResNet blocks type 1 like the VITS model
     # Useful parameters to enable the Speaker Consistency Loss (SCL) described in the paper
     # use_speaker_encoder_as_loss=True,
     # Useful parameters to enable multilingual training
@@ -144,9 +144,9 @@ config = VitsConfig(
     output_path=OUT_PATH,
     model_args=model_args,
     run_name=RUN_NAME,
-    project_name="YourTTS",
+    project_name="Yourtts",
     run_description="""
-            - Original YourTTS trained using VCTK dataset
+            - Original Yourtts trained using VCTK dataset
         """,
     dashboard_logger="tensorboard",
     logger_uri=None,
@@ -171,7 +171,7 @@ config = VitsConfig(
     add_blank=True,
     text_cleaner="multilingual_cleaners",
     characters=CharactersConfig(
-        characters_class="TTS.tts.models.vits.VitsCharacters",
+        characters_class="tts.tts.models.vits.VitsCharacters",
         pad="_",
         eos="&",
         bos="*",

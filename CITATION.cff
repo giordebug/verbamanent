@@ -12,9 +12,9 @@ abstract: >-
   Words remain. 
 
   VerbaManent is an actively maintained open-source neural
-  text-to-speech (TTS) engine.
+  text-to-speech (tts) engine.
 
-  It continues the work of Coqui-TTS with a renewed focus on
+  It continues the work of Coqui-tts with a renewed focus on
   quality, accessibility, and performance on consumer-grade
   hardware.
 keywords:
@@ -22,7 +22,7 @@ keywords:
   - deep learning
   - artificial intelligence
   - text to speech
-  - TTS
+  - tts
   - verbamanent
 license: MPL-2.0
 version: 1

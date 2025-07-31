@@ -2,10 +2,10 @@ import os
 import unittest
 
 from tests import get_tests_input_path
-from TTS.tts.datasets.formatters import common_voice
+from verbamanent.tts.datasets.formatters import common_voice
 
 
-class TestTTSFormatters(unittest.TestCase):
+class TestttsFormatters(unittest.TestCase):
     def test_common_voice_preprocessor(self):  # pylint: disable=no-self-use
         root_path = get_tests_input_path()
         meta_file = "common_voice.tsv"

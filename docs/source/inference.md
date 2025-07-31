@@ -1,59 +1,59 @@
 (synthesizing_speech)=
 # Synthesizing Speech
 
-First, you need to install TTS. We recommend using PyPi. You need to call the command below:
+First, you need to install tts. We recommend using PyPi. You need to call the command below:
 
 ```bash
-$ pip install TTS
+$ pip install tts
 ```
 
 After the installation, 2 terminal commands are available.
 
-1. TTS Command Line Interface (CLI). - `tts`
+1. tts Command Line Interface (CLI). - `tts`
 2. Local Demo Server. - `tts-server`
-3. In 🐍Python. - `from TTS.api import TTS`
+3. In 🐍Python. - `from verbamanent.api import tts`
 
 ## On the Commandline - `tts`
 ![cli.gif](https://github.com/giordebug/verbamanent/raw/main/images/tts_cli.gif)
 
-After the installation, 🐸TTS provides a CLI interface for synthesizing speech using pre-trained models. You can either use your own model or the release models under 🐸TTS.
+After the installation, 🐸tts provides a CLI interface for synthesizing speech using pre-trained models. You can either use your own model or the release models under 🐸tts.
 
-Listing released 🐸TTS models.
+Listing released 🐸tts models.
 
 ```bash
 tts --list_models
 ```
 
-Run a TTS model, from the release models list, with its default vocoder. (Simply copy and paste the full model names from the list as arguments for the command below.)
+Run a tts model, from the release models list, with its default vocoder. (Simply copy and paste the full model names from the list as arguments for the command below.)
 
 ```bash
-tts --text "Text for TTS" \
+tts --text "Text for tts" \
     --model_name "<type>/<language>/<dataset>/<model_name>" \
     --out_path folder/to/save/output.wav
 ```
 
-Run a tts and a vocoder model from the released model list. Note that not every vocoder is compatible with every TTS model.
+Run a tts and a vocoder model from the released model list. Note that not every vocoder is compatible with every tts model.
 
 ```bash
-tts --text "Text for TTS" \
+tts --text "Text for tts" \
     --model_name "tts_models/<language>/<dataset>/<model_name>" \
     --vocoder_name "vocoder_models/<language>/<dataset>/<model_name>" \
     --out_path folder/to/save/output.wav
 ```
 
-Run your own TTS model (Using Griffin-Lim Vocoder)
+Run your own tts model (Using Griffin-Lim Vocoder)
 
 ```bash
-tts --text "Text for TTS" \
+tts --text "Text for tts" \
     --model_path path/to/model.pth \
     --config_path path/to/config.json \
     --out_path folder/to/save/output.wav
 ```
 
-Run your own TTS and Vocoder models
+Run your own tts and Vocoder models
 
 ```bash
-tts --text "Text for TTS" \
+tts --text "Text for tts" \
     --config_path path/to/config.json \
     --model_path path/to/model.pth \
     --out_path folder/to/save/output.wav \
@@ -61,11 +61,11 @@ tts --text "Text for TTS" \
     --vocoder_config_path path/to/vocoder_config.json
 ```
 
-Run a multi-speaker TTS model from the released models list.
+Run a multi-speaker tts model from the released models list.
 
 ```bash
 tts --model_name "tts_models/<language>/<dataset>/<model_name>"  --list_speaker_idxs  # list the possible speaker IDs.
-tts --text "Text for TTS." --out_path output/path/speech.wav --model_name "tts_models/<language>/<dataset>/<model_name>"  --speaker_idx "<speaker_id>"
+tts --text "Text for tts." --out_path output/path/speech.wav --model_name "tts_models/<language>/<dataset>/<model_name>"  --speaker_idx "<speaker_id>"
 ```
 
 Run a released voice conversion model
@@ -77,14 +77,14 @@ tts --model_name "voice_conversion/<language>/<dataset>/<model_name>"
     --out_path folder/to/save/output.wav
 ```
 
-**Note:** You can use ```./TTS/bin/synthesize.py``` if you prefer running ```tts``` from the TTS project folder.
+**Note:** You can use ```./tts/bin/synthesize.py``` if you prefer running ```tts``` from the tts project folder.
 
 ## On the Demo Server - `tts-server`
 
  <!-- <img src="https://raw.githubusercontent.com/giordebug/verbamanent/main/images/demo_server.gif" height="56"/> -->
 ![server.gif](https://github.com/giordebug/verbamanent/raw/main/images/demo_server.gif)
 
-You can boot up a demo 🐸TTS server to run an inference with your models. Note that the server is not optimized for performance
+You can boot up a demo 🐸tts server to run an inference with your models. Note that the server is not optimized for performance
 but gives you an easy way to interact with the models.
 
 The demo server provides pretty much the same interface as the CLI command.
@@ -94,39 +94,39 @@ tts-server -h # see the help
 tts-server --list_models  # list the available models.
 ```
 
-Run a TTS model, from the release models list, with its default vocoder.
-If the model you choose is a multi-speaker TTS model, you can select different speakers on the Web interface and synthesize
+Run a tts model, from the release models list, with its default vocoder.
+If the model you choose is a multi-speaker tts model, you can select different speakers on the Web interface and synthesize
 speech.
 
 ```bash
 tts-server --model_name "<type>/<language>/<dataset>/<model_name>"
 ```
 
-Run a TTS and a vocoder model from the released model list. Note that not every vocoder is compatible with every TTS model.
+Run a tts and a vocoder model from the released model list. Note that not every vocoder is compatible with every tts model.
 
 ```bash
 tts-server --model_name "<type>/<language>/<dataset>/<model_name>" \
            --vocoder_name "<type>/<language>/<dataset>/<model_name>"
 ```
 
-## Python 🐸TTS API
+## Python 🐸tts API
 
 You can run a multi-speaker and multi-lingual model in Python as
 
 ```python
 import torch
-from TTS.api import TTS
+from verbamanent.api import tts
 
 # Get device
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# List available 🐸TTS models
-print(TTS().list_models())
+# List available 🐸tts models
+print(tts().list_models())
 
-# Init TTS
-tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
+# Init tts
+tts = tts("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
 
-# Run TTS
+# Run tts
 # ❗ Since this model is multi-lingual voice cloning model, we must set the target speaker_wav and language
 # Text to speech list of amplitude values as output
 wav = tts.tts(text="Hello world!", speaker_wav="my/cloning/audio.wav", language="en")
@@ -137,16 +137,16 @@ tts.tts_to_file(text="Hello world!", speaker_wav="my/cloning/audio.wav", languag
 #### Here is an example for a single speaker model.
 
 ```python
-# Init TTS with the target model name
-tts = TTS(model_name="tts_models/de/thorsten/tacotron2-DDC", progress_bar=False)
-# Run TTS
+# Init tts with the target model name
+tts = tts(model_name="tts_models/de/thorsten/tacotron2-DDC", progress_bar=False)
+# Run tts
 tts.tts_to_file(text="Ich bin eine Testnachricht.", file_path=OUTPUT_PATH)
 ```
 
-#### Example voice cloning with YourTTS in English, French and Portuguese:
+#### Example voice cloning with Yourtts in English, French and Portuguese:
 
 ```python
-tts = TTS(model_name="tts_models/multilingual/multi-dataset/your_tts", progress_bar=False).to("cuda")
+tts = tts(model_name="tts_models/multilingual/multi-dataset/your_tts", progress_bar=False).to("cuda")
 tts.tts_to_file("This is voice cloning.", speaker_wav="my/cloning/audio.wav", language="en", file_path="output.wav")
 tts.tts_to_file("C'est le clonage de la voix.", speaker_wav="my/cloning/audio.wav", language="fr", file_path="output.wav")
 tts.tts_to_file("Isso é clonagem de voz.", speaker_wav="my/cloning/audio.wav", language="pt", file_path="output.wav")
@@ -155,16 +155,16 @@ tts.tts_to_file("Isso é clonagem de voz.", speaker_wav="my/cloning/audio.wav", 
 #### Example voice conversion converting speaker of the `source_wav` to the speaker of the `target_wav`
 
 ```python
-tts = TTS(model_name="voice_conversion_models/multilingual/vctk/freevc24", progress_bar=False).to("cuda")
+tts = tts(model_name="voice_conversion_models/multilingual/vctk/freevc24", progress_bar=False).to("cuda")
 tts.voice_conversion_to_file(source_wav="my/source.wav", target_wav="my/target.wav", file_path="output.wav")
 ```
 
-#### Example voice cloning by a single speaker TTS model combining with the voice conversion model.
+#### Example voice cloning by a single speaker tts model combining with the voice conversion model.
 
-This way, you can clone voices by using any model in 🐸TTS.
+This way, you can clone voices by using any model in 🐸tts.
 
 ```python
-tts = TTS("tts_models/de/thorsten/tacotron2-DDC")
+tts = tts("tts_models/de/thorsten/tacotron2-DDC")
 tts.tts_with_vc_to_file(
     "Wie sage ich auf Italienisch, dass ich dich liebe?",
     speaker_wav="target/speaker.wav",
@@ -178,12 +178,12 @@ For these models use the following name format: `tts_models/<lang-iso_code>/fair
 You can find the list of language ISO codes [here](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html) and learn about the Fairseq models [here](https://github.com/facebookresearch/fairseq/tree/main/examples/mms).
 
 ```python
-from TTS.api import TTS
-api = TTS(model_name="tts_models/eng/fairseq/vits").to("cuda")
+from verbamanent.api import tts
+api = tts(model_name="tts_models/eng/fairseq/vits").to("cuda")
 api.tts_to_file("This is a test.", file_path="output.wav")
 
-# TTS with on the fly voice conversion
-api = TTS("tts_models/deu/fairseq/vits")
+# tts with on the fly voice conversion
+api = tts("tts_models/deu/fairseq/vits")
 api.tts_with_vc_to_file(
     "Wie sage ich auf Italienisch, dass ich dich liebe?",
     speaker_wav="target/speaker.wav",

@@ -36,7 +36,7 @@ class SimpleConfig(Coqpit):
         check_argument("val_c", c, restricted=True)
 ```
 
-In TTS, each model must have a configuration class that exposes all the values necessary for its lifetime.
+In tts, each model must have a configuration class that exposes all the values necessary for its lifetime.
 
 It defines model architecture, hyper-parameters, training, and inference settings. For our models, we merge all the fields in a single configuration class for ease. It may not look like a wise practice but enables easier bookkeeping and reproducible experiments.
 
@@ -56,4 +56,4 @@ ModelConfig()
 
 In the example above, ```ModelConfig()``` is the final configuration that the model receives and it has all the fields necessary for the model.
 
-We host pre-defined model configurations under ```TTS/<model_class>/configs/```. Although we recommend a unified config class, you can decompose it as you like as for your custom models as long as all the fields for the trainer, model, and inference APIs are provided.
+We host pre-defined model configurations under ```tts/<model_class>/configs/```. Although we recommend a unified config class, you can decompose it as you like as for your custom models as long as all the fields for the trainer, model, and inference APIs are provided.

@@ -6,7 +6,7 @@ labels: feature request
 assignees: ''
 
 ---
-<!-- Welcome to the 🐸TTS project!
+<!-- Welcome to the 🐸tts project!
 We are excited to see your interest, and appreciate your support! --->
 **🚀 Feature Description**
 

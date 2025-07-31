@@ -4,8 +4,8 @@ import unittest
 import torch
 
 from tests import get_tests_output_path, run_cli
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.vits_config import VitsConfig
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.vits_config import VitsConfig
 
 torch.manual_seed(1)
 
@@ -54,7 +54,7 @@ class TestFindUniquePhonemes(unittest.TestCase):
         config.save_json(config_path)
 
         # run test
-        run_cli(f'CUDA_VISIBLE_DEVICES="" python TTS/bin/find_unique_phonemes.py --config_path "{config_path}"')
+        run_cli(f'CUDA_VISIBLE_DEVICES="" python tts/bin/find_unique_phonemes.py --config_path "{config_path}"')
 
     @staticmethod
     def test_no_espeak_phonemes():
@@ -78,4 +78,4 @@ class TestFindUniquePhonemes(unittest.TestCase):
         config.save_json(config_path)
 
         # run test
-        run_cli(f'CUDA_VISIBLE_DEVICES="" python TTS/bin/find_unique_phonemes.py --config_path "{config_path}"')
+        run_cli(f'CUDA_VISIBLE_DEVICES="" python tts/bin/find_unique_phonemes.py --config_path "{config_path}"')

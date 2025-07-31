@@ -1,15 +1,15 @@
 import os
 
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.config.shared_configs import BaseAudioConfig
-from TTS.tts.configs.glow_tts_config import GlowTTSConfig
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.glow_tts import GlowTTS
-from TTS.tts.utils.speakers import SpeakerManager
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
-from TTS.utils.audio import AudioProcessor
+from verbamanent.config.shared_configs import BaseAudioConfig
+from verbamanent.tts.configs.glow_tts_config import GlowttsConfig
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.glow_tts import Glowtts
+from verbamanent.tts.utils.speakers import SpeakerManager
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
+from verbamanent.utils.audio import AudioProcessor
 
 # set experiment paths
 output_path = os.path.dirname(os.path.abspath(__file__))
@@ -17,7 +17,7 @@ dataset_path = os.path.join(output_path, "../VCTK/")
 
 # download the dataset if not downloaded
 if not os.path.exists(dataset_path):
-    from TTS.utils.downloaders import download_vctk
+    from verbamanent.utils.downloaders import download_vctk
 
     download_vctk(dataset_path)
 
@@ -25,11 +25,11 @@ if not os.path.exists(dataset_path):
 dataset_config = BaseDatasetConfig(formatter="vctk", meta_file_train="", path=dataset_path)
 
 # define audio config
-# ❗ resample the dataset externally using `TTS/bin/resample.py` and set `resample=False` for faster training
+# ❗ resample the dataset externally using `tts/bin/resample.py` and set `resample=False` for faster training
 audio_config = BaseAudioConfig(sample_rate=22050, resample=True, do_trim_silence=True, trim_db=23.0)
 
 # define model config
-config = GlowTTSConfig(
+config = GlowttsConfig(
     batch_size=64,
     eval_batch_size=16,
     num_loader_workers=4,
@@ -62,13 +62,13 @@ ap = AudioProcessor.init_from_config(config)
 # INITIALIZE THE TOKENIZER
 # Tokenizer is used to convert text to sequences of token IDs.
 # If characters are not defined in the config, default characters are passed to the config
-tokenizer, config = TTSTokenizer.init_from_config(config)
+tokenizer, config = ttsTokenizer.init_from_config(config)
 
 # LOAD DATA SAMPLES
 # Each sample is a list of ```[text, audio_file_path, speaker_name]```
 # You can define your custom sample loader returning the list of samples.
 # Or define your custom formatter and pass it to the `load_tts_samples`.
-# Check `TTS.tts.datasets.load_tts_samples` for more details.
+# Check `tts.tts.datasets.load_tts_samples` for more details.
 train_samples, eval_samples = load_tts_samples(
     dataset_config,
     eval_split=True,
@@ -83,10 +83,10 @@ speaker_manager.set_ids_from_data(train_samples + eval_samples, parse_key="speak
 config.num_speakers = speaker_manager.num_speakers
 
 # init model
-model = GlowTTS(config, ap, tokenizer, speaker_manager=speaker_manager)
+model = Glowtts(config, ap, tokenizer, speaker_manager=speaker_manager)
 
 # INITIALIZE THE TRAINER
-# Trainer provides a generic API to train all the 🐸TTS models with all its perks like mixed-precision training,
+# Trainer provides a generic API to train all the 🐸tts models with all its perks like mixed-precision training,
 # distributed training, etc.
 trainer = Trainer(
     TrainerArgs(), config, output_path, model=model, train_samples=train_samples, eval_samples=eval_samples

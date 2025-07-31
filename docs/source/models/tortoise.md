@@ -1,15 +1,15 @@
 # 🐢 Tortoise
-Tortoise is a very expressive TTS system with impressive voice cloning capabilities. It is based on an GPT like autogressive acoustic model that converts input
+Tortoise is a very expressive tts system with impressive voice cloning capabilities. It is based on an GPT like autogressive acoustic model that converts input
 text to discritized acoustic tokens, a diffusion model that converts these tokens to melspectrogram frames and a Univnet vocoder to convert the spectrograms to
-the final audio signal. The important downside is that Tortoise is very slow compared to the parallel TTS models like VITS.
+the final audio signal. The important downside is that Tortoise is very slow compared to the parallel tts models like VITS.
 
-Big thanks to 👑[@manmay-nakhashi](https://github.com/manmay-nakhashi) who helped us implement Tortoise in 🐸TTS.
+Big thanks to 👑[@manmay-nakhashi](https://github.com/manmay-nakhashi) who helped us implement Tortoise in 🐸tts.
 
 Example use:
 
 ```python
-from TTS.tts.configs.tortoise_config import TortoiseConfig
-from TTS.tts.models.tortoise import Tortoise
+from verbamanent.tts.configs.tortoise_config import TortoiseConfig
+from verbamanent.tts.models.tortoise import Tortoise
 
 config = TortoiseConfig()
 model = Tortoise.init_from_config(config)
@@ -22,13 +22,13 @@ output_dict = model.synthesize(text, config, speaker_id="random", extra_voice_di
 output_dict = model.synthesize(text, config, speaker_id="speaker_n", extra_voice_dirs="path/to/speaker_n/", **kwargs)
 ```
 
-Using 🐸TTS API:
+Using 🐸tts API:
 
 ```python
-from TTS.api import TTS
-tts = TTS("tts_models/en/multi-dataset/tortoise-v2")
+from verbamanent.api import tts
+tts = tts("tts_models/en/multi-dataset/tortoise-v2")
 
-# cloning `lj` voice from `TTS/tts/utils/assets/tortoise/voices/lj`
+# cloning `lj` voice from `tts/tts/utils/assets/tortoise/voices/lj`
 # with custom inference settings overriding defaults.
 tts.tts_to_file(text="Hello, my name is Manmay , how are you?",
                 file_path="output.wav",
@@ -49,7 +49,7 @@ tts.tts_to_file(text="Hello, my name is Manmay , how are you?",
                 file_path="output.wav")
 ```
 
-Using 🐸TTS Command line:
+Using 🐸tts Command line:
 
 ```console
 # cloning the `lj` voice
@@ -77,18 +77,18 @@ tts --model_name  tts_models/en/multi-dataset/tortoise-v2 \
 
 ## TortoiseConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.tortoise_config.TortoiseConfig
+.. autoclass:: tts.tts.configs.tortoise_config.TortoiseConfig
     :members:
 ```
 
 ## TortoiseArgs
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.tortoise.TortoiseArgs
+.. autoclass:: tts.tts.models.tortoise.TortoiseArgs
     :members:
 ```
 
 ## Tortoise Model
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.tortoise.Tortoise
+.. autoclass:: tts.tts.models.tortoise.Tortoise
     :members:
 ```

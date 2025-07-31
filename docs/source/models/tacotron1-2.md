@@ -1,6 +1,6 @@
 # 🌮 Tacotron 1 and 2
 
-Tacotron is one of the first successful DL-based text-to-mel models and opened up the whole TTS field for more DL research.
+Tacotron is one of the first successful DL-based text-to-mel models and opened up the whole tts field for more DL research.
 
 Tacotron mainly is an encoder-decoder model with attention.
 
@@ -14,7 +14,7 @@ Tacotron also uses a Prenet module with Dropout that projects the model’s prev
 
 Training the attention is notoriously problematic in Tacoron models. Especially, in inference, for some input sequences, the alignment fails and causes the model to produce unexpected results. There are many different methods proposed to improve the attention.
 
-After hundreds of experiments,  @ 🐸TTS we suggest Double Decoder Consistency that leads to the most robust model performance.
+After hundreds of experiments,  @ 🐸tts we suggest Double Decoder Consistency that leads to the most robust model performance.
 
 If you have a limited VRAM, then you can try using the Guided Attention Loss or the Dynamic Convolutional Attention. You can also combine the two.
 
@@ -32,31 +32,31 @@ If you have a limited VRAM, then you can try using the Guided Attention Loss or 
 
 ## BaseTacotron
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.base_tacotron.BaseTacotron
+.. autoclass:: tts.tts.models.base_tacotron.BaseTacotron
     :members:
 ```
 
 ## Tacotron
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.tacotron.Tacotron
+.. autoclass:: tts.tts.models.tacotron.Tacotron
     :members:
 ```
 
 ## Tacotron2
 ```{eval-rst}
-.. autoclass:: TTS.tts.models.tacotron2.Tacotron2
+.. autoclass:: tts.tts.models.tacotron2.Tacotron2
     :members:
 ```
 
 ## TacotronConfig
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.tacotron_config.TacotronConfig
+.. autoclass:: tts.tts.configs.tacotron_config.TacotronConfig
     :members:
 ```
 
 ## Tacotron2Config
 ```{eval-rst}
-.. autoclass:: TTS.tts.configs.tacotron2_config.Tacotron2Config
+.. autoclass:: tts.tts.configs.tacotron2_config.Tacotron2Config
     :members:
 ```
 

@@ -3,17 +3,17 @@ from dataclasses import dataclass, field
 
 from coqpit import Coqpit
 
-from TTS.tts.utils.text.characters import Graphemes, IPAPhonemes, _blank, _bos, _eos, _pad, _phonemes, _punctuations
-from TTS.tts.utils.text.phonemizers import ESpeak
-from TTS.tts.utils.text.tokenizer import TTSTokenizer
+from verbamanent.tts.utils.text.characters import Graphemes, IPAPhonemes, _blank, _bos, _eos, _pad, _phonemes, _punctuations
+from verbamanent.tts.utils.text.phonemizers import ESpeak
+from verbamanent.tts.utils.text.tokenizer import ttsTokenizer
 
 
-class TestTTSTokenizer(unittest.TestCase):
+class TestttsTokenizer(unittest.TestCase):
     def setUp(self):
-        self.tokenizer = TTSTokenizer(use_phonemes=False, characters=Graphemes())
+        self.tokenizer = ttsTokenizer(use_phonemes=False, characters=Graphemes())
 
         self.ph = ESpeak("tr", backend="espeak")
-        self.tokenizer_ph = TTSTokenizer(use_phonemes=True, characters=IPAPhonemes(), phonemizer=self.ph)
+        self.tokenizer_ph = ttsTokenizer(use_phonemes=True, characters=IPAPhonemes(), phonemizer=self.ph)
 
     def test_encode_decode_graphemes(self):
         text = "This is, a test."
@@ -60,7 +60,7 @@ class TestTTSTokenizer(unittest.TestCase):
 
     def test_not_found_characters(self):
         self.ph = ESpeak("en-us")
-        tokenizer_local = TTSTokenizer(use_phonemes=True, characters=IPAPhonemes(), phonemizer=self.ph)
+        tokenizer_local = ttsTokenizer(use_phonemes=True, characters=IPAPhonemes(), phonemizer=self.ph)
         self.assertEqual(len(self.tokenizer.not_found_characters), 0)
         text = "Yolk of one egg beaten light"
         ids = tokenizer_local.text_to_ids(text)
@@ -92,7 +92,7 @@ class TestTTSTokenizer(unittest.TestCase):
             text_cleaner: str = "phoneme_cleaners"
             characters = field(default_factory=Characters)
 
-        tokenizer_ph, _ = TTSTokenizer.init_from_config(TokenizerConfig())
+        tokenizer_ph, _ = ttsTokenizer.init_from_config(TokenizerConfig())
         tokenizer_ph.phonemizer.backend = "espeak"
         text = "Bu bir Örnek."
         text_ph = "<BOS>" + self.ph.phonemize(text, separator="") + "<EOS>"

@@ -3,13 +3,13 @@ import os
 import shutil
 
 from tests import get_device_id, get_tests_output_path, run_cli
-from TTS.config.shared_configs import BaseAudioConfig
-from TTS.encoder.configs.speaker_encoder_config import SpeakerEncoderConfig
+from verbamanent.config.shared_configs import BaseAudioConfig
+from verbamanent.encoder.configs.speaker_encoder_config import SpeakerEncoderConfig
 
 
 def run_test_train():
     command = (
-        f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_encoder.py --config_path {config_path} "
+        f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_encoder.py --config_path {config_path} "
         f"--coqpit.output_path {output_path} "
         "--coqpit.datasets.0.formatter ljspeech_test "
         "--coqpit.datasets.0.meta_file_train metadata.csv "
@@ -50,7 +50,7 @@ continue_path = max(glob.glob(os.path.join(output_path, "*/")), key=os.path.getm
 
 # restore the model and continue training for one more epoch
 command_train = (
-    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_encoder.py --continue_path {continue_path} "
+    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_encoder.py --continue_path {continue_path} "
 )
 run_cli(command_train)
 shutil.rmtree(continue_path)
@@ -67,7 +67,7 @@ continue_path = max(glob.glob(os.path.join(output_path, "*/")), key=os.path.getm
 
 # restore the model and continue training for one more epoch
 command_train = (
-    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python TTS/bin/train_encoder.py --continue_path {continue_path} "
+    f"CUDA_VISIBLE_DEVICES='{get_device_id()}' python tts/bin/train_encoder.py --continue_path {continue_path} "
 )
 run_cli(command_train)
 shutil.rmtree(continue_path)

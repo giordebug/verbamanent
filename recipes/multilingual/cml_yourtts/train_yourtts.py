@@ -1,33 +1,33 @@
 import os
 
 import torch
-from trainer import Trainer, TrainerArgs
+#from trainer import Trainer, TrainerArgs
 
-from TTS.bin.compute_embeddings import compute_embeddings
-from TTS.bin.resample import resample_files
-from TTS.config.shared_configs import BaseDatasetConfig
-from TTS.tts.configs.vits_config import VitsConfig
-from TTS.tts.datasets import load_tts_samples
-from TTS.tts.models.vits import CharactersConfig, Vits, VitsArgs, VitsAudioConfig
-from TTS.utils.downloaders import download_libri_tts
+from verbamanent.bin.compute_embeddings import compute_embeddings
+from verbamanent.bin.resample import resample_files
+from verbamanent.config.shared_configs import BaseDatasetConfig
+from verbamanent.tts.configs.vits_config import VitsConfig
+from verbamanent.tts.datasets import load_tts_samples
+from verbamanent.tts.models.vits import CharactersConfig, Vits, VitsArgs, VitsAudioConfig
+from verbamanent.utils.downloaders import download_libri_tts
 
 torch.set_num_threads(24)
 
 # pylint: disable=W0105
 """
-    This recipe replicates the first experiment proposed in the CML-TTS paper (https://arxiv.org/abs/2306.10097). It uses the YourTTS model.
-    YourTTS model is based on the VITS model however it uses external speaker embeddings extracted from a pre-trained speaker encoder and has small architecture changes.
+    This recipe replicates the first experiment proposed in the CML-tts paper (https://arxiv.org/abs/2306.10097). It uses the Yourtts model.
+    Yourtts model is based on the VITS model however it uses external speaker embeddings extracted from a pre-trained speaker encoder and has small architecture changes.
 """
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Name of the run for the Trainer
-RUN_NAME = "YourTTS-CML-TTS"
+RUN_NAME = "Yourtts-CML-tts"
 
 # Path where you want to save the models outputs (configs, checkpoints and tensorboard logs)
-OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
+OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-Yourtts/"
 
-# If you want to do transfer learning and speedup your training you can set here the path to the CML-TTS available checkpoint that cam be downloaded here:  https://drive.google.com/u/2/uc?id=1yDCSJ1pFZQTHhL09GMbOrdjcPULApa0p
-RESTORE_PATH = "/raid/edresson/CML_YourTTS/checkpoints_yourtts_cml_tts_dataset/best_model.pth"  # Download the checkpoint here:  https://drive.google.com/u/2/uc?id=1yDCSJ1pFZQTHhL09GMbOrdjcPULApa0p
+# If you want to do transfer learning and speedup your training you can set here the path to the CML-tts available checkpoint that cam be downloaded here:  https://drive.google.com/u/2/uc?id=1yDCSJ1pFZQTHhL09GMbOrdjcPULApa0p
+RESTORE_PATH = "/raid/edresson/CML_Yourtts/checkpoints_yourtts_cml_tts_dataset/best_model.pth"  # Download the checkpoint here:  https://drive.google.com/u/2/uc?id=1yDCSJ1pFZQTHhL09GMbOrdjcPULApa0p
 
 # This paramter is useful to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
 SKIP_TRAIN_EPOCH = False
@@ -42,30 +42,30 @@ SAMPLE_RATE = 24000
 # Max audio length in seconds to be used in training (every audio bigger than it will be ignored)
 MAX_AUDIO_LEN_IN_SECONDS = float("inf")
 
-### Download CML-TTS dataset
-# You need to download the dataset for all languages manually and extract it to a path and then set the CML_DATASET_PATH to this path: https://github.com/freds0/CML-TTS-Dataset#download
-CML_DATASET_PATH = "./datasets/CML-TTS-Dataset/"
+### Download CML-tts dataset
+# You need to download the dataset for all languages manually and extract it to a path and then set the CML_DATASET_PATH to this path: https://github.com/freds0/CML-tts-Dataset#download
+CML_DATASET_PATH = "./datasets/CML-tts-Dataset/"
 
 
-### Download LibriTTS dataset
+### Download Libritts dataset
 # it will automatic download the dataset, if you have problems you can comment it and manually donwload and extract it ! Download link: https://www.openslr.org/resources/60/train-clean-360.tar.gz
-LIBRITTS_DOWNLOAD_PATH = "./datasets/LibriTTS/"
-# Check if LibriTTS dataset is not already downloaded, if not download it
-if not os.path.exists(LIBRITTS_DOWNLOAD_PATH):
-    print(">>> Downloading LibriTTS dataset:")
-    download_libri_tts(LIBRITTS_DOWNLOAD_PATH, subset="libri-tts-clean-360")
+LIBRItts_DOWNLOAD_PATH = "./datasets/Libritts/"
+# Check if Libritts dataset is not already downloaded, if not download it
+if not os.path.exists(LIBRItts_DOWNLOAD_PATH):
+    print(">>> Downloading Libritts dataset:")
+    download_libri_tts(LIBRItts_DOWNLOAD_PATH, subset="libri-tts-clean-360")
 
-# init LibriTTS configs
+# init Libritts configs
 libritts_config = BaseDatasetConfig(
     formatter="libri_tts",
     dataset_name="libri_tts",
     meta_file_train="",
     meta_file_val="",
-    path=os.path.join(LIBRITTS_DOWNLOAD_PATH, "train-clean-360/"),
+    path=os.path.join(LIBRItts_DOWNLOAD_PATH, "train-clean-360/"),
     language="en",
 )
 
-# init CML-TTS configs
+# init CML-tts configs
 pt_config = BaseDatasetConfig(
     formatter="cml_tts",
     dataset_name="cml_tts",
@@ -174,7 +174,7 @@ audio_config = VitsAudioConfig(
     num_mels=80,
 )
 
-# Init VITSArgs setting the arguments that are needed for the YourTTS model
+# Init VITSArgs setting the arguments that are needed for the Yourtts model
 model_args = VitsArgs(
     spec_segment_size=62,
     hidden_channels=192,
@@ -188,7 +188,7 @@ model_args = VitsArgs(
     d_vector_dim=512,
     speaker_encoder_model_path=SPEAKER_ENCODER_CHECKPOINT_PATH,
     speaker_encoder_config_path=SPEAKER_ENCODER_CONFIG_PATH,
-    resblock_type_decoder="2",  # In the paper, we accidentally trained the YourTTS using ResNet blocks type 2, if you like you can use the ResNet blocks type 1 like the VITS model
+    resblock_type_decoder="2",  # In the paper, we accidentally trained the Yourtts using ResNet blocks type 2, if you like you can use the ResNet blocks type 1 like the VITS model
     # Useful parameters to enable the Speaker Consistency Loss (SCL) described in the paper
     use_speaker_encoder_as_loss=False,
     # Useful parameters to enable multilingual training
@@ -201,9 +201,9 @@ config = VitsConfig(
     output_path=OUT_PATH,
     model_args=model_args,
     run_name=RUN_NAME,
-    project_name="YourTTS",
+    project_name="Yourtts",
     run_description="""
-            - YourTTS trained using CML-TTS and LibriTTS datasets
+            - Yourtts trained using CML-tts and Libritts datasets
         """,
     dashboard_logger="tensorboard",
     logger_uri=None,
@@ -228,7 +228,7 @@ config = VitsConfig(
     add_blank=True,
     text_cleaner="multilingual_cleaners",
     characters=CharactersConfig(
-        characters_class="TTS.tts.models.vits.VitsCharacters",
+        characters_class="tts.tts.models.vits.VitsCharacters",
         pad="_",
         eos="&",
         bos="*",
@@ -255,9 +255,9 @@ config = VitsConfig(
             None,
             "pt-br",
         ],
-        ["You'll have the view of the top of the mountain that you climb.", "LTTS_6574", None, "en"],
-        ["When you don\u2019t take any risks, you risk everything.", "LTTS_6206", None, "en"],
-        ["Are necessary too many years of work to succeed overnight.", "LTTS_5717", None, "en"],
+        ["You'll have the view of the top of the mountain that you climb.", "Ltts_6574", None, "en"],
+        ["When you don\u2019t take any risks, you risk everything.", "Ltts_6206", None, "en"],
+        ["Are necessary too many years of work to succeed overnight.", "Ltts_5717", None, "en"],
         ["Je hebt uitzicht op de top van de berg die je beklimt.", "960", None, "du"],
         ["Als je geen risico neemt, riskeer je alles.", "2450", None, "du"],
         ["Zijn te veel jaren werk nodig om van de ene op de andere dag te slagen.", "10984", None, "du"],
@@ -310,7 +310,7 @@ config = VitsConfig(
         # 'new_speaker': 106, # (CML tot. train speaker)/4 = (424/4) = 106
         # }
     },
-    # It defines the Speaker Consistency Loss (SCL) α to 9 like the YourTTS paper
+    # It defines the Speaker Consistency Loss (SCL) α to 9 like the Yourtts paper
     speaker_encoder_loss_alpha=9.0,
 )
 

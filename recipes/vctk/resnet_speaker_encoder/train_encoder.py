@@ -1,12 +1,12 @@
 import os
 
-from TTS.encoder.configs.speaker_encoder_config import SpeakerEncoderConfig
+from verbamanent.encoder.configs.speaker_encoder_config import SpeakerEncoderConfig
 
-# from TTS.encoder.configs.emotion_encoder_config import EmotionEncoderConfig
-from TTS.tts.configs.shared_configs import BaseDatasetConfig
+# from verbamanent.encoder.configs.emotion_encoder_config import EmotionEncoderConfig
+from verbamanent.tts.configs.shared_configs import BaseDatasetConfig
 
 CURRENT_PATH = os.getcwd()
-# change the root path to the TTS root path
+# change the root path to the tts root path
 os.chdir("../../../")
 
 ### Definitions ###
@@ -132,8 +132,8 @@ config.save_json(CONFIG_OUT_PATH)
 
 print(CONFIG_OUT_PATH)
 if RESTORE_PATH is not None:
-    command = f"python TTS/bin/train_encoder.py --config_path {CONFIG_OUT_PATH} --restore_path {RESTORE_PATH}"
+    command = f"python tts/bin/train_encoder.py --config_path {CONFIG_OUT_PATH} --restore_path {RESTORE_PATH}"
 else:
-    command = f"python TTS/bin/train_encoder.py --config_path {CONFIG_OUT_PATH}"
+    command = f"python tts/bin/train_encoder.py --config_path {CONFIG_OUT_PATH}"
 
 os.system(command)

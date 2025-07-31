@@ -36,9 +36,9 @@ RUN pip install \
     -r requirements.ja.txt \
     -r requirements.notebooks.txt
 
-# Copy TTS repository contents:
+# Copy tts repository contents:
 COPY . /root
 
-# Installing the TTS package itself:
+# Installing the tts package itself:
 RUN make install
 

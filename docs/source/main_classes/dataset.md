@@ -1,25 +1,25 @@
 # Datasets
 
-## TTS Dataset
+## tts Dataset
 
 ```{eval-rst}
-.. autoclass:: TTS.tts.datasets.TTSDataset
+.. autoclass:: tts.tts.datasets.ttsDataset
     :members:
 ```
 
 ## Vocoder Dataset
 
 ```{eval-rst}
-.. autoclass:: TTS.vocoder.datasets.gan_dataset.GANDataset
+.. autoclass:: tts.vocoder.datasets.gan_dataset.GANDataset
     :members:
 ```
 
 ```{eval-rst}
-.. autoclass:: TTS.vocoder.datasets.wavegrad_dataset.WaveGradDataset
+.. autoclass:: tts.vocoder.datasets.wavegrad_dataset.WaveGradDataset
     :members:
 ```
 
 ```{eval-rst}
-.. autoclass:: TTS.vocoder.datasets.wavernn_dataset.WaveRNNDataset
+.. autoclass:: tts.vocoder.datasets.wavernn_dataset.WaveRNNDataset
     :members:
 ```
